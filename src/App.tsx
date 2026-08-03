@@ -6,11 +6,10 @@ import { PhotoPage } from './components/PhotoPage';
 import { BlogPage } from './components/BlogPage';
 import { AboutPage } from './components/AboutPage';
 import { PostDetail } from './components/PostDetail';
-import { Sidebar } from './components/Sidebar';
 import { Footer } from './components/Footer';
 import { useState } from 'react';
 
-function HomeLayout({ children }: { children: React.ReactNode }) {
+function HomeLayout({ children }: { children?: React.ReactNode }) {
   const [isDark, setIsDark] = useState(false);
   const toggleTheme = () => {
     const next = !isDark;
@@ -30,10 +29,11 @@ function HomeLayout({ children }: { children: React.ReactNode }) {
       />
       <NoticesBar />
       <Hero />
-      <main className="main-content">
-        <div className="content-primary">{children}</div>
-        <Sidebar />
-      </main>
+      {children && (
+        <main className="main-content main-content--full">
+          <div className="content-primary">{children}</div>
+        </main>
+      )}
       <Footer />
     </>
   );
@@ -70,19 +70,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={
-          <HomeLayout>
-            <PhotoPage />
-            <BlogPage />
-            <AboutPage />
-          </HomeLayout>
-        } />
+        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route path="/home" element={<HomeLayout />} />
         <Route path="/photos" element={
-          <HomeLayout>
+          <BlogLayout>
             <PhotoPage />
-            <BlogPage />
-            <AboutPage />
-          </HomeLayout>
+          </BlogLayout>
         } />
         <Route path="/daily" element={
           <BlogLayout>
@@ -99,7 +92,7 @@ export default function App() {
             <PostDetail />
           </BlogLayout>
         } />
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </BrowserRouter>
   );

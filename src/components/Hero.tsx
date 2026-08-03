@@ -1,5 +1,6 @@
 import { authorInfo } from '../data/loader';
 import { LeafIcon, CoffeeIcon, MusicIcon, FlowerIcon, BookIcon } from './Icons';
+import { Link } from 'react-router-dom';
 
 export function Hero() {
   return (
@@ -13,7 +14,7 @@ export function Hero() {
                 欢迎来到<em>鹦鹉世界</em>
               </h1>
               <p className="hero-subtitle">
-                一只绿鹦鹉的岛屿生活记录。清晨的咖啡、午后的阳光、海边的散步、花园里的花开花落——在这里，时间很慢，每一天都很平凡又美好。
+                 牡丹鹦鹉的生活记录。清晨的咖啡、午后的阳光、海边的散步、花园里的花开花落——在这里，时间很慢，每一天都带来开心。
               </p>
               <div className="hero-tags">
                 <span className="hero-tag"><LeafIcon size={12} /> 生活在岛上</span>
@@ -67,6 +68,13 @@ export function Hero() {
           </div>
         </div>
       </div>
+
+      <Link to="/daily" className="explore-more">
+        <span className="explore-more-text">探索更多</span>
+        <span className="explore-arrow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+        </span>
+      </Link>
     </section>
   );
 }

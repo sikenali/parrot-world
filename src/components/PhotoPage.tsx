@@ -48,11 +48,11 @@ export function PhotoPage() {
     <>
       <section className="page-hero">
         <div className="page-hero-inner">
-          <div className="page-hero-badge">
+          <div className="page-hero-badge page-hero-badge--photos">
             <CameraIcon size={12} />
-            {' '}生活照片墙
+            {' '}XiaoJiBaoBao
           </div>
-          <h1 className="page-hero-title">岛屿光影</h1>
+          <h1 className="page-hero-title">我和紫米的欢乐时光</h1>
           <p className="page-hero-sub">共 {photos.length} 张 · 用镜头记录每一个平凡而温暖的瞬间</p>
         </div>
       </section>

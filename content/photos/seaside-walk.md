@@ -1,7 +1,7 @@
 ---
-title: "海边的散步"
-image: "https://images.pexels.com/photos/30563259/pexels-photo-30563259.jpeg?auto=compress&cs=tinysrgb&w=800"
+title: "去郊游啦"
+image: "https://images.pexels.com/photos/32145863/pexels-photo-32145863.jpeg?auto=compress&cs=tinysrgb&w=800"
 tags:
-  - 海边
-  - 散步
+  - 牡丹鹦鹉
+  - 日常
 ---

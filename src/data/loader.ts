@@ -105,8 +105,8 @@ const authorData = authorRaw ? (parseFrontmatter(authorRaw).data as unknown as R
 
 export const authorInfo: AuthorInfo = {
   name: authorData.name || '紫米 ZiMi',
-  nickname: authorData.nickname || '绿鹦鹉 · 岛屿居民',
-  role: authorData.nickname || '绿鹦鹉 · 岛屿居民',
+  nickname: authorData.nickname || '紫鹦鹉 · 岛屿居民',
+  role: authorData.nickname || '紫鹦鹉 · 岛屿居民',
   avatar: authorData.avatar || '',
   quote: authorData.quote || '',
   location: authorData.location || '',

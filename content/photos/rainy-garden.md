@@ -1,8 +1,8 @@
 ---
-title: "雨后的花园"
-image: "https://images.pexels.com/photos/247466/pexels-photo-247466.jpeg?auto=compress&cs=tinysrgb&w=800"
+title: "雨后的专属时光"
+image: "https://images.pexels.com/photos/20807682/pexels-photo-20807682.jpeg?auto=compress&cs=tinysrgb&w=800"
 tags:
-  - 花
-  - 自然
+  - 牡丹鹦鹉
+  - 日常
 wide: true
 ---

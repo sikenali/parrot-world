@@ -1,4 +1,4 @@
-import { BirdIcon, RssIcon, GithubIcon } from './Icons';
+import { BirdIcon } from './Icons';
 
 export function Footer() {
   return (
@@ -11,13 +11,11 @@ export function Footer() {
             </span>
             鹦鹉世界 · 紫米的小窝
           </div>
-          <div style={{ marginTop: 4 }}>
-            &copy; 2024&ndash;{new Date().getFullYear()} ZiMi &middot; 用 <span style={{ color: 'var(--theme-primary)' }}>&#9829;</span> 记录每一天
-          </div>
         </div>
         <div className="footer-links">
-          <a href="#" className="footer-link"><RssIcon size={14} /> RSS</a>
-          <a href="#" className="footer-link"><GithubIcon size={14} /> GitHub</a>
+          <div style={{ marginTop: 4 }}>
+            &copy; 2026 ZiMi &middot; 用 <span style={{ color: 'var(--theme-primary)' }}>&#9829;</span> 记录每一天
+          </div>
         </div>
       </div>
     </footer>

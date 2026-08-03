@@ -32,7 +32,7 @@ export function PostDetail() {
         <div className="post-not-found-text">这篇文章可能已被删除或移动了位置。</div>
         <Link to="/daily" className="back-link">
           <ArrowLeftIcon size={14} />
-          返回日常点滴
+          返回 Peekaboo
         </Link>
       </div>
     );
@@ -42,7 +42,7 @@ export function PostDetail() {
     <article className="post-detail">
       <Link to="/daily" className="back-link">
         <ArrowLeftIcon size={14} />
-        返回日常点滴
+        返回 Peekaboo
       </Link>
 
       <header className="post-detail-header">
@@ -73,7 +73,7 @@ export function PostDetail() {
       <div className="post-detail-footer">
         <Link to="/daily" className="back-link">
           <ArrowLeftIcon size={14} />
-          返回日常点滴
+          返回 Peekaboo
         </Link>
       </div>
     </article>

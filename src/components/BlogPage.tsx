@@ -53,11 +53,11 @@ export function BlogPage() {
     <>
       <section className="page-hero">
         <div className="page-hero-inner">
-          <div className="page-hero-badge" style={{ background: 'var(--theme-accent)', color: 'var(--color-on-accent)' }}>
+          <div className="page-hero-badge page-hero-badge--daily">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>
-            {' '}日常点滴
+            {' '}Peekaboo
           </div>
-          <h1 className="page-hero-title">岛屿随笔</h1>
+          <h1 className="page-hero-title">我和紫米的日常点滴</h1>
           <p className="page-hero-sub">共 {posts.length} 篇记录 · 关于生活、自然与每一个温柔的瞬间</p>
         </div>
       </section>

@@ -6,19 +6,19 @@ export function AboutPage() {
     <>
       <section className="page-hero">
         <div className="page-hero-inner">
-          <div className="page-hero-badge" style={{ background: 'var(--theme-accent)', color: 'var(--color-on-accent)' }}>
+          <div className="page-hero-badge page-hero-badge--about">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7l-3-2a2 2 0 0 0-2.7.4L2 16v2a2 2 0 0 0 2 2h1"/></svg>
-            {' '}关于紫米
+            {' '}AboutZIMI
           </div>
-          <h1 className="page-hero-title">岛屿居民档案</h1>
-          <p className="page-hero-sub">一只绿鹦鹉的岛屿生活记录</p>
+          <h1 className="page-hero-title">我的紫米宝宝档案</h1>
+          <p className="page-hero-sub">牡丹鹦鹉的生活记录</p>
         </div>
       </section>
 
       <div className="about-page">
         <img
-          src="https://images.pexels.com/photos/247466/pexels-photo-247466.jpeg?auto=compress&cs=tinysrgb&w=1200"
-          alt="岛上的花园"
+          src="https://images.pexels.com/photos/18113177/pexels-photo-18113177.jpeg?auto=compress&cs=tinysrgb&w=1200"
+          alt="紫米在笼子里的站杆上"
           className="about-page-hero"
           loading="lazy"
         />
@@ -27,11 +27,11 @@ export function AboutPage() {
             <img src={authorInfo.avatar} alt="紫米" className="about-avatar" />
             <div>
               <div className="about-name">{authorInfo.name}</div>
-              <div className="about-nick">绿鹦鹉 · 岛屿居民 · 花园园丁</div>
+              <div className="about-nick">紫鹦鹉 · 岛屿居民 · 花园园丁</div>
             </div>
           </div>
           <div className="about-bio">
-            我是一只绿色的鹦鹉，最喜欢的事情就是在岛上散步、收集种子、和邻居们聊天。我的窝在岛最东边的那棵椰子树下，每天清晨听着海浪声醒来，傍晚坐在阳台上看着太阳沉入海平面。这里没有闹钟，没有打卡，只有风的声音和朋友的问候。
+            我是一只紫色的鹦鹉，最喜欢的事情就是在岛上散步、收集种子、和邻居们聊天。我的窝在岛最东边的那棵椰子树下，每天清晨听着海浪声醒来，傍晚坐在阳台上看着太阳沉入海平面。这里没有闹钟，没有打卡，只有风的声音和朋友的问候。
           </div>
           <div className="about-grid">
             <div className="about-detail-card">

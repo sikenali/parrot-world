@@ -11,12 +11,11 @@ interface HeaderProps {
 
 export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: HeaderProps) {
   const location = useLocation();
-  const isHome = location.pathname === '/';
 
   const tabs = [
-    { id: 'photos', label: '生活照片墙', path: '/photos' },
-    { id: 'moments', label: '日常点滴', path: '/daily' },
-    { id: 'about', label: '关于紫米', path: '/about' },
+    { id: 'photos', label: 'XiaoJiBaoBao', path: '/photos' },
+    { id: 'moments', label: 'Peekaboo', path: '/daily' },
+    { id: 'about', label: 'AboutZIMI', path: '/about' },
   ];
 
   const isActive = (path: string) => {
@@ -28,7 +27,7 @@ export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: Header
     <header className={`site-header${isCompact ? ' is-compact' : ''}`} data-scroll-header>
       <div className="header-surface">
         <div className="header-inner">
-          <Link to="/" className="brand">
+          <Link to="/home" className="brand">
             <span className="brand-mark">
               <span className="brand-mark-inner">
                 <BirdIcon size={22} />
@@ -39,7 +38,7 @@ export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: Header
               <small>ZiMi&apos;s Nest</small>
             </span>
           </Link>
-          {isHome && (
+          {!isCompact && (
             <div className="primary-nav" id="primary-navigation">
               <nav aria-label="主导航">
                 <ul>
