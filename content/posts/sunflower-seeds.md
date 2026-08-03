@@ -1,7 +1,7 @@
 ---
 title: "种下了第一批向日葵种子，期待着秋天的金黄"
 date: 2026-07-24
-cover: "https://images.pexels.com/photos/1062197/pexels-photo-1062197.jpeg?auto=compress&cs=tinysrgb&w=800"
+cover: "https://images.pexels.com/photos/1312017/pexels-photo-1312017.jpeg?auto=compress&cs=tinysrgb&w=800"
 category: "园艺"
 excerpt: "邻居送了我一包向日葵种子，种在后院向阳的位置。每天早上浇水，看着泥土里冒出的小绿芽，像是看到了秋天的阳光提前抵达。"
 views: 198

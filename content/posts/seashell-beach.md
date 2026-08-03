@@ -1,7 +1,7 @@
 ---
 title: "去海边捡贝壳，遇见了一只迷路的小海星"
 date: 2026-07-26
-cover: "https://images.pexels.com/photos/1118286/pexels-photo-1118286.jpeg?auto=compress&cs=tinysrgb&w=800"
+cover: "https://images.pexels.com/photos/30223876/pexels-photo-30223876.jpeg?auto=compress&cs=tinysrgb&w=800"
 category: "旅行"
 excerpt: "今天的潮水退得早，沿着礁石走了好久。在沙滩角落发现了一只小海星，给它找了个有水的小坑，希望它明天还能找到回家的路。"
 views: 256
