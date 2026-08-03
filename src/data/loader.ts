@@ -1,4 +1,4 @@
-import matter from 'gray-matter';
+import { parseFrontmatter } from './frontmatter';
 import type { Post, Photo, AuthorInfo, Notice, Tag } from '../types';
 
 interface RawPost {
@@ -69,8 +69,8 @@ function sortByDateDesc<T extends { date: string }>(arr: T[]): T[] {
 
 export const posts: Post[] = sortByDateDesc(
   Object.entries(postModules).map(([path, raw], idx) => {
-    const { data, content } = matter(raw);
-    const fm = data as RawPost;
+    const { data, content } = parseFrontmatter(raw);
+    const fm = data as unknown as RawPost;
     return {
       id: idx + 1,
       cover: fm.cover || '',
@@ -88,8 +88,8 @@ export const posts: Post[] = sortByDateDesc(
 );
 
 export const photos: Photo[] = Object.entries(photoModules).map(([, raw], idx) => {
-  const { data } = matter(raw);
-  const fm = data as RawPhoto;
+  const { data } = parseFrontmatter(raw);
+  const fm = data as unknown as RawPhoto;
   return {
     id: idx + 1,
     src: fm.image || '',
@@ -101,7 +101,7 @@ export const photos: Photo[] = Object.entries(photoModules).map(([, raw], idx) =
 });
 
 const authorRaw = Object.values(authorModule)[0] || '';
-const authorData = authorRaw ? (matter(authorRaw).data as RawAuthor) : {};
+const authorData = authorRaw ? (parseFrontmatter(authorRaw).data as unknown as RawAuthor) : {};
 
 export const authorInfo: AuthorInfo = {
   name: authorData.name || '紫米 ZiMi',
@@ -116,7 +116,7 @@ export const authorInfo: AuthorInfo = {
 };
 
 const noticesRaw = Object.values(noticesModule)[0] || '';
-const noticesData = noticesRaw ? (matter(noticesRaw).data as RawNotices) : {};
+const noticesData = noticesRaw ? (parseFrontmatter(noticesRaw).data as unknown as RawNotices) : {};
 
 export const notices: Notice[] = (noticesData.items || [])
   .map(i => i.text)
