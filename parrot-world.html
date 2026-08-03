@@ -1,0 +1,1598 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>鹦鹉世界 · 紫米的小窝</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <style>
+    :root {
+      --theme-primary: #19c8b9;
+      --theme-primary-hover: #3dd4c6;
+      --theme-primary-active: #11a89b;
+      --theme-focus: #ffcc00;
+      --theme-text: #794f27;
+      --theme-text-body: #725d42;
+      --theme-text-muted: #8a7b66;
+      --theme-surface: #f8f8f0;
+      --theme-surface-content: #f7f3df;
+      --theme-surface-secondary: #f0e8d8;
+      --theme-border: #c4b89e;
+      --theme-accent: #f7cd67;
+      --content-width: 72rem;
+      --prose-width: 46rem;
+      --header-height: 3.75rem;
+      --header-width: 58rem;
+      --header-offset: 1rem;
+      --page-gutter: clamp(1.25rem, 3vw, 3.5rem);
+      --radius-small: 0.75rem;
+      --radius-base: 1.125rem;
+      --radius-large: 1.5rem;
+      --radius-pill: 999px;
+      --motion-duration: 220ms;
+      --motion-easing: cubic-bezier(0.4, 0, 0.2, 1);
+      --shadow-small: 0 2px 4px rgb(61 52 40 / 6%);
+      --shadow-base: 0 3px 10px rgb(61 52 40 / 10%);
+      --color-on-primary: #173b35;
+      --color-on-accent: #3b2c16;
+      --color-surface-raised: rgb(255 255 255 / 52%);
+      --color-surface-glass: rgb(248 248 240 / 64%);
+      --color-ink-subtle: rgb(114 93 66 / 16%);
+      --color-white: #fffdf6;
+
+      --font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-family);
+      background: var(--theme-surface);
+      color: var(--theme-text);
+      font-weight: 500;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ===== HEADER ===== */
+    .site-header {
+      position: relative;
+      z-index: 50;
+      top: 0;
+      width: 100%;
+      min-height: var(--header-height);
+      pointer-events: none;
+    }
+
+    .header-surface {
+      position: fixed;
+      top: 0; right: 0; left: 0;
+      width: 100%;
+      margin-inline: auto;
+      min-height: var(--header-height);
+      overflow: hidden;
+      border: 1px solid transparent;
+      background:
+        radial-gradient(ellipse 42rem 29rem at 8% -8rem, rgb(25 200 185 / 19%), transparent 74%),
+        radial-gradient(ellipse 34rem 24rem at 92% 9rem, rgb(247 205 103 / 12%), transparent 76%),
+        rgb(248 248 240 / 64%);
+      backdrop-filter: blur(14px) saturate(1.06);
+      pointer-events: auto;
+      isolation: isolate;
+      transition:
+        width 360ms var(--motion-easing),
+        transform 360ms var(--motion-easing),
+        border-radius 360ms var(--motion-easing),
+        background 360ms var(--motion-easing),
+        box-shadow 360ms var(--motion-easing),
+        border-color 360ms var(--motion-easing);
+    }
+
+    .header-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+      width: 100%;
+      min-height: var(--header-height);
+      align-items: center;
+      gap: 0;
+      padding: 0.5rem clamp(1rem, 5vw, 5rem);
+      transition: padding 360ms var(--motion-easing);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: var(--theme-text);
+      justify-self: start;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: block;
+      width: 2.5rem;
+      height: 2.5rem;
+      overflow: hidden;
+      border-radius: 50%;
+      border: 2px solid var(--theme-border);
+      background: var(--theme-primary);
+      transition: transform 360ms var(--motion-easing);
+    }
+
+    .brand-mark-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 0.05rem;
+      line-height: 1;
+    }
+
+    .brand-copy strong {
+      font-size: 1.12rem;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      color: var(--theme-text);
+    }
+
+    .brand-copy small {
+      color: var(--theme-text-muted);
+      font-size: 0.54rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .primary-nav { display: flex; align-items: center; justify-self: center; }
+    .primary-nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.22rem;
+      margin: 0; padding: 0;
+      list-style: none;
+    }
+
+    .nav-link {
+      display: inline-flex;
+      min-height: 2.45rem;
+      align-items: center;
+      border-radius: var(--radius-pill);
+      padding: 0.42rem 0.88rem;
+      color: var(--theme-text-body);
+      font-size: 0.9rem;
+      font-weight: 800;
+      text-decoration: none;
+      transition:
+        background var(--motion-duration) var(--motion-easing),
+        color var(--motion-duration) var(--motion-easing),
+        transform var(--motion-duration) var(--motion-easing);
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: inherit;
+    }
+
+    .nav-link:hover {
+      transform: translateY(-1px);
+      background: rgb(25 200 185 / 12%);
+      color: var(--theme-text);
+    }
+
+    .nav-link.active {
+      background: linear-gradient(135deg, #a9b9dc, #92a8d7);
+      box-shadow: inset 0 1px rgb(255 255 255 / 34%), 0 0.16rem 0 #778cb9;
+      color: #fff;
+    }
+
+    .theme-toggle {
+      display: inline-flex;
+      min-height: 2.45rem;
+      align-items: center;
+      justify-content: center;
+      gap: 0.35rem;
+      border: 1px solid transparent;
+      border-radius: var(--radius-pill);
+      background: transparent;
+      color: var(--theme-text-body);
+      font: inherit;
+      font-size: 0.76rem;
+      font-weight: 800;
+      cursor: pointer;
+      justify-self: end;
+      transition: background var(--motion-duration) var(--motion-easing), color var(--motion-duration) var(--motion-easing);
+    }
+
+    .theme-toggle:hover { background: rgb(25 200 185 / 12%); color: var(--theme-text); }
+
+    .theme-icon { width: 1.05rem; height: 1.05rem; fill: none; stroke: currentcolor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.9; }
+    .theme-icon-moon, .theme-icon-system { display: none; }
+    :root[data-theme-setting='light'] .theme-icon-sun { display: block; }
+    :root[data-theme-setting='light'] .theme-icon-moon,
+    :root[data-theme-setting='light'] .theme-icon-system { display: none; }
+    :root[data-theme-setting='dark'] .theme-icon-sun,
+    :root[data-theme-setting='dark'] .theme-icon-system { display: none; }
+    :root[data-theme-setting='dark'] .theme-icon-moon { display: block; }
+    :root[data-theme-setting='system'] .theme-icon-sun,
+    :root[data-theme-setting='system'] .theme-icon-moon { display: none; }
+    :root[data-theme-setting='system'] .theme-icon-system { display: block; }
+
+    .menu-toggle { display: none; }
+
+    /* Compact header on scroll */
+    .site-header.is-compact .header-surface {
+      width: min(calc(100% - (var(--page-gutter) * 2)), var(--header-width));
+      border-color: rgb(159 146 125 / 45%);
+      border-radius: 1.7rem;
+      background:
+        linear-gradient(112deg, rgb(255 255 255 / 88%), rgb(247 243 223 / 92%) 48%, rgb(240 232 216 / 90%)),
+        var(--theme-surface-content);
+      box-shadow:
+        0 1.1rem 2.8rem rgb(61 52 40 / 15%),
+        inset 0 1px rgb(255 255 255 / 82%);
+      transform: translateY(var(--header-offset));
+    }
+
+    .site-header.is-compact .header-surface::before {
+      position: absolute; inset: 0; z-index: 0;
+      background-image: radial-gradient(rgb(121 79 39 / 13%) 1px, transparent 1px);
+      background-size: 13px 13px;
+      opacity: 0.35;
+      content: '';
+    }
+
+    .site-header.is-compact .header-inner { position: relative; z-index: 1; padding: 0.38rem 0.6rem 0.38rem 0.48rem; }
+    .site-header.is-compact .brand-mark { transform: scale(0.96) rotate(-2deg); }
+
+    @media (max-width: 640px) {
+      .header-surface { overflow: visible; }
+      .header-inner { display: flex; gap: 0; padding-inline: 0.5rem; }
+      .site-header.is-compact .header-surface {
+        width: calc(100% - (var(--page-gutter) * 2));
+        transform: translateY(0.5rem);
+      }
+      .primary-nav {
+        position: absolute; top: calc(100% + 0.45rem); left: 50%;
+        z-index: 2; display: none; width: 100vw;
+        transform: translateX(-50%);
+        border: 1px solid rgb(159 146 125 / 48%);
+        border-radius: var(--radius-large);
+        background: var(--theme-surface-content);
+        padding: 0.7rem;
+        box-shadow: var(--shadow-base);
+      }
+      .site-header.is-menu-open .primary-nav { display: grid; gap: 0.35rem; }
+      .primary-nav nav { min-width: 0; overflow: visible; }
+      .primary-nav ul { display: grid; gap: 0.35rem; }
+      .primary-nav .nav-link { width: 100%; min-height: 3.1rem; justify-content: flex-start; padding-inline: 1rem; font-size: 0.96rem; }
+      .brand { margin-right: auto; }
+      .brand-copy small { display: none; }
+      .brand-copy strong { overflow: hidden; font-size: 1rem; text-overflow: ellipsis; white-space: nowrap; }
+      .brand-mark { width: 2.25rem; height: 2.25rem; }
+      .theme-toggle { min-width: 2.25rem; min-height: 2.25rem; margin-left: 0.15rem; }
+      .menu-toggle {
+        display: grid; width: 2.75rem; min-width: 2.75rem; height: 2.75rem;
+        align-content: center; justify-content: center; gap: 0.24rem;
+        margin-left: 0.15rem; border: 1px solid transparent;
+        border-radius: var(--radius-pill); background: transparent;
+        color: var(--theme-text-body); cursor: pointer;
+      }
+      .menu-toggle span {
+        display: block; width: 1.15rem; height: 0.14rem;
+        border-radius: var(--radius-pill); background: currentcolor;
+        transition: transform var(--motion-duration) var(--motion-easing);
+      }
+      .site-header.is-menu-open .menu-toggle span:nth-child(1) { transform: translateY(0.4rem) rotate(45deg); }
+      .site-header.is-menu-open .menu-toggle span:nth-child(2) { transform: scaleX(0); }
+      .site-header.is-menu-open .menu-toggle span:nth-child(3) { transform: translateY(-0.4rem) rotate(-45deg); }
+      .theme-toggle-label { display: none; }
+    }
+
+    /* ===== NOTICES ===== */
+    .notices-bar {
+      background: linear-gradient(90deg, var(--theme-primary), var(--theme-primary-hover));
+      color: var(--color-on-primary);
+      text-align: center;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 700;
+      position: relative;
+      z-index: 1;
+    }
+
+    .notices-bar .notice-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      margin: 0 4px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .notices-bar .notice-dot.active { background: #fff; }
+
+    /* ===== HERO ===== */
+    .hero-section {
+      padding-top: calc(var(--header-height) + 32px);
+      padding-bottom: 32px;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--page-gutter);
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .hero-left { display: flex; flex-direction: column; gap: 20px; }
+
+    .hero-banner {
+      background: var(--theme-surface-content);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-large);
+      padding: 32px 36px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-banner::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgb(121 79 39 / 8%) 1px, transparent 1px);
+      background-size: 12px 12px;
+      pointer-events: none;
+    }
+
+    .hero-banner-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      color: var(--theme-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .hero-title {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--theme-text);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--theme-primary);
+    }
+
+    .hero-subtitle {
+      font-size: 15px;
+      color: var(--theme-text-body);
+      font-weight: 500;
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 16px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 700;
+      border: 1.5px solid var(--theme-border);
+      background: var(--theme-surface);
+      color: var(--theme-text-body);
+      transition: all var(--motion-duration) var(--motion-easing);
+    }
+
+    .hero-tag:hover {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+      background: rgb(25 200 185 / 8%);
+    }
+
+    .hero-tag svg { width: 12px; height: 12px; }
+
+    /* Hero right sidebar */
+    .hero-sidebar { display: flex; flex-direction: column; gap: 12px; }
+
+    .author-card {
+      background: var(--theme-surface-content);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      transition: transform var(--motion-duration) var(--motion-easing);
+    }
+
+    .author-card:hover { transform: translateY(-2px); }
+
+    .author-card-header {
+      background: var(--theme-primary);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .author-card-header::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgb(255 255 255 / 8%) 1px, transparent 1px);
+      background-size: 8px 8px;
+      pointer-events: none;
+    }
+
+    .author-avatar {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255,255,255,0.6);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .author-info { position: relative; z-index: 1; }
+
+    .author-eyebrow {
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      color: rgba(255,255,255,0.7);
+      text-transform: uppercase;
+    }
+
+    .author-name {
+      font-size: 17px;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .author-role {
+      font-size: 11px;
+      color: rgba(255,255,255,0.8);
+      font-weight: 600;
+    }
+
+    .author-card-body { padding: 14px 16px; }
+
+    .author-bio {
+      font-size: 12px;
+      color: var(--theme-text-muted);
+      font-weight: 600;
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .author-detail {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--theme-text-body);
+      font-weight: 600;
+    }
+
+    .author-detail svg { width: 14px; height: 14px; color: var(--theme-primary); flex-shrink: 0; }
+
+    .author-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 8px 4px;
+      background: var(--theme-surface);
+      border-radius: var(--radius-small);
+      border: 1px solid var(--theme-border);
+    }
+
+    .stat-num {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--theme-primary);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--theme-text-muted);
+      margin-top: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .island-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      background: rgb(111 186 44 / 8%);
+      border: 1px solid rgb(111 186 44 / 25%);
+      border-radius: var(--radius-small);
+      margin-top: 8px;
+    }
+
+    .island-status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--theme-success, #6fba2c);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .island-status-text {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--theme-text-body);
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .main-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 var(--page-gutter) 64px;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .content-primary { display: flex; flex-direction: column; gap: 24px; }
+    .content-secondary { display: flex; flex-direction: column; gap: 16px; }
+
+    /* ===== SECTION RIBBON ===== */
+    .section-ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 16px;
+    }
+
+    .section-ribbon-bg {
+      background: var(--theme-primary);
+      color: #fff;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 20px 6px 16px;
+      border-radius: var(--radius-small) 0 0 var(--radius-small);
+      letter-spacing: 0.04em;
+      position: relative;
+    }
+
+    .section-ribbon-bg::after {
+      content: '';
+      position: absolute;
+      right: -12px; top: 0;
+      width: 0; height: 0;
+      border-left: 12px solid var(--theme-primary);
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+    }
+
+    .section-ribbon-sub {
+      background: var(--theme-primary-bg, #e6f9f6);
+      color: var(--theme-primary);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 0 var(--radius-small) var(--radius-small) 0;
+      border: 1.5px solid var(--theme-primary);
+      border-left: none;
+    }
+
+    /* ===== PHOTO WALL ===== */
+    .photo-wall-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 160px;
+      gap: 10px;
+    }
+
+    .photo-card {
+      border-radius: var(--radius-base);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      border: 1.5px solid var(--theme-border);
+      background: var(--theme-surface-content);
+      transition: transform var(--motion-duration) var(--motion-easing), box-shadow var(--motion-duration) var(--motion-easing);
+    }
+
+    .photo-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgb(61 52 40 / 15%);
+    }
+
+    .photo-card.tall { grid-row: span 2; }
+    .photo-card.wide { grid-column: span 2; }
+
+    .photo-card img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s var(--motion-easing);
+    }
+
+    .photo-card:hover img { transform: scale(1.06); }
+
+    .photo-caption {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 28px 10px 8px;
+      background: linear-gradient(transparent, rgba(121,79,39,0.55));
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      opacity: 0;
+      transition: opacity var(--motion-duration) var(--motion-easing);
+    }
+
+    .photo-card:hover .photo-caption { opacity: 1; }
+
+    /* ===== BLOG POSTS ===== */
+    .posts-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .post-card {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      background: var(--theme-surface-content);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform var(--motion-duration) var(--motion-easing), box-shadow var(--motion-duration) var(--motion-easing);
+    }
+
+    .post-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-base);
+    }
+
+    .post-cover {
+      width: 100%; height: 100%;
+      min-height: 140px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .post-body {
+      padding: 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+    }
+
+    .post-meta-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .post-category {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      background: rgb(25 200 185 / 10%);
+      color: var(--theme-primary);
+      border: 1px solid rgb(25 200 185 / 25%);
+    }
+
+    .post-date {
+      font-size: 11px;
+      color: var(--theme-text-muted);
+      font-weight: 600;
+    }
+
+    .post-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--theme-text);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+
+    .post-excerpt {
+      font-size: 13px;
+      color: var(--theme-text-body);
+      line-height: 1.6;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .post-meta-bottom {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: auto;
+    }
+
+    .post-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--theme-text-muted);
+      background: var(--theme-surface);
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--theme-border);
+    }
+
+    .post-stats {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .post-stat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--theme-text-muted);
+      font-weight: 600;
+    }
+
+    .post-stat svg { width: 13px; height: 13px; }
+
+    /* ===== SIDEBAR WIDGETS ===== */
+    .widget {
+      background: var(--theme-surface-content);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-large);
+      overflow: hidden;
+    }
+
+    .widget-header {
+      background: var(--theme-primary);
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.04em;
+      position: relative;
+    }
+
+    .widget-header::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgb(255 255 255 / 6%) 1px, transparent 1px);
+      background-size: 6px 6px;
+      pointer-events: none;
+    }
+
+    .widget-body { padding: 14px 16px; }
+
+    .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .tag-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--theme-text-body);
+      border: 1px solid var(--theme-border);
+      background: var(--theme-surface);
+      text-decoration: none;
+      transition: all var(--motion-duration) var(--motion-easing);
+      cursor: pointer;
+    }
+
+    .tag-item:hover {
+      border-color: var(--theme-primary);
+      color: var(--theme-primary);
+      background: rgb(25 200 185 / 8%);
+    }
+
+    .tag-count {
+      font-size: 10px;
+      background: var(--theme-border);
+      color: var(--theme-text-muted);
+      border-radius: 50%;
+      width: 16px; height: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .about-section {
+      background: var(--theme-surface-content);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .about-hero-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      border-bottom: 1px solid var(--theme-border);
+    }
+
+    .about-body { padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+
+    .about-name-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .about-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--theme-primary);
+      box-shadow: 0 2px 8px rgba(25,200,185,0.2);
+    }
+
+    .about-name {
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--theme-text);
+    }
+
+    .about-nick {
+      font-size: 12px;
+      color: var(--theme-text-muted);
+      font-weight: 600;
+    }
+
+    .about-bio {
+      font-size: 13px;
+      color: var(--theme-text-body);
+      line-height: 1.7;
+      padding: 12px 16px;
+      background: var(--theme-surface);
+      border-radius: var(--radius-small);
+      border: 1px solid var(--theme-border);
+      font-style: italic;
+    }
+
+    .about-detail-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      background: var(--theme-surface);
+      border: 1px solid var(--theme-border);
+      border-radius: var(--radius-small);
+      transition: transform var(--motion-duration) var(--motion-easing);
+    }
+
+    .about-detail-card:hover { transform: translateY(-1px); }
+
+    .about-detail-card-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid;
+    }
+
+    .about-detail-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--theme-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .about-detail-card-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--theme-text);
+      margin-top: 2px;
+    }
+
+    .about-quote {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--theme-surface-content);
+      border: 1px dashed var(--theme-border);
+      border-radius: var(--radius-small);
+      font-size: 13px;
+      font-style: italic;
+      color: var(--theme-text-muted);
+      font-weight: 600;
+    }
+
+    .about-quote svg { color: var(--theme-accent); flex-shrink: 0; }
+
+    /* ===== FOOTER ===== */
+    .site-footer {
+      background: var(--theme-surface-content);
+      border-top: 1px solid var(--theme-border);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-left {
+      font-size: 12px;
+      color: var(--theme-text-muted);
+      font-weight: 600;
+    }
+
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-brand-icon {
+      width: 20px; height: 20px;
+      background: var(--theme-primary);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .footer-brand-icon svg { width: 12px; height: 12px; color: #fff; }
+
+    .footer-links {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .footer-link {
+      font-size: 12px;
+      color: var(--theme-text-muted);
+      text-decoration: none;
+      font-weight: 700;
+      transition: color var(--motion-duration) var(--motion-easing);
+    }
+
+    .footer-link:hover { color: var(--theme-primary); }
+
+    /* ===== DARK MODE ===== */
+    :root[data-theme='dark'] {
+      --theme-text: #f2e7d5;
+      --theme-text-body: #d6c9b7;
+      --theme-text-muted: #aca08f;
+      --theme-surface: #181d1a;
+      --theme-surface-content: #222a24;
+      --theme-surface-secondary: #2b342c;
+      --theme-border: #4a574b;
+      --theme-focus: #ffd878;
+      --theme-accent: #e7bd63;
+      --shadow-small: 0 2px 6px rgb(0 0 0 / 18%);
+      --shadow-base: 0 8px 24px rgb(0 0 0 / 24%);
+      --color-ink-subtle: rgb(214 201 183 / 18%);
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-sidebar { display: none; }
+      .main-content { grid-template-columns: 1fr; }
+      .content-secondary { display: none; }
+      .photo-wall-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: 140px;
+      }
+      .photo-card.wide { grid-column: span 1; }
+      .post-card { grid-template-columns: 140px 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title { font-size: 26px; }
+      .hero-banner { padding: 24px 20px; }
+      .post-card { grid-template-columns: 1fr; }
+      .post-cover { min-height: 160px; }
+      .photo-wall-grid { grid-auto-rows: 120px; }
+      .about-body { padding: 16px; }
+      .about-name-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--theme-surface); }
+    ::-webkit-scrollbar-thumb { background: var(--theme-border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--theme-text-muted); }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel" data-presets="react">
+    const { useState, useEffect } = React;
+
+    // ===== ICONS =====
+    function Icon({ name, size = 16, className = '' }) {
+      const s = { width: size, height: size, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: '2', strokeLinecap: 'round', strokeLinejoin: 'round' };
+      const icons = {
+        bird: <svg {...s}><path d="M16 7h.01"/><path d="M3.4 18H12a8 8 0 0 0 8-8V7l-3-2a2 2 0 0 0-2.7.4L2 16v2a2 2 0 0 0 2 2h1"/></svg>,
+        leaf: <svg {...s}><path d="M11 20A7 7 0 0 1 9 8.13l-2.3-2.3a1 1 0 0 0-1.4 0l-.76.76a1 1 0 0 0 0 1.4L9 17.4a7 7 0 0 0 9.9-9.9l-2.1-2.1a1 1 0 0 0-1.42 0L14.5 4"/></svg>,
+        coffee: <svg {...s}><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>,
+        music: <svg {...s}><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>,
+        flower: <svg {...s}><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>,
+        sun: <svg {...s}><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
+        sun2: <svg {...s}><circle cx="12" cy="12" r="4"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>,
+        mapPin: <svg {...s}><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>,
+        book: <svg {...s}><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>,
+        camera: <svg {...s}><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>,
+        feather: <svg {...s}><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/></svg>,
+        heart: <svg {...s}><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>,
+        clock: <svg {...s}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+        message: <svg {...s}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>,
+        home: <svg {...s}><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>,
+        search: <svg {...s}><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>,
+        github: <svg {...s}><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>,
+        rss: <svg {...s}><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1"/></svg>,
+      };
+      return <span className={className} aria-hidden="true">{icons[name] || null}</span>;
+    }
+
+    // ===== HEADER =====
+    function Header({ activeTab, onTabChange, isDark, onThemeToggle, isCompact }) {
+      const tabs = [
+        { id: 'photos', label: '生活照片墙' },
+        { id: 'moments', label: '日常点滴' },
+        { id: 'about', label: '关于紫米' },
+      ];
+      return (
+        <header className={`site-header${isCompact ? ' is-compact' : ''}`} data-scroll-header>
+          <div className="header-surface">
+            <div className="header-inner">
+              <a className="brand" href="#">
+                <span className="brand-mark">
+                  <span className="brand-mark-inner">
+                    <Icon name="bird" size={22} />
+                  </span>
+                </span>
+                <span className="brand-copy">
+                  <strong>鹦鹉世界</strong>
+                  <small>ZiMi's Nest</small>
+                </span>
+              </a>
+              <div className="primary-nav" id="primary-navigation">
+                <nav aria-label="主导航">
+                  <ul>
+                    {tabs.map(t => (
+                      <li key={t.id}>
+                        <button
+                          className={`nav-link ${activeTab === t.id ? 'active' : ''}`}
+                          onClick={() => onTabChange(t.id)}
+                        >
+                          {t.label}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+              </div>
+              <button
+                className="theme-toggle"
+                type="button"
+                aria-label={isDark ? '切换至亮色模式' : '切换至暗色模式'}
+                onClick={onThemeToggle}
+              >
+                <Icon name={isDark ? 'sun2' : 'sun'} size={16} className="theme-icon" />
+                <span className="theme-toggle-label">主题</span>
+              </button>
+              <button className="menu-toggle" type="button" aria-label="打开导航菜单" aria-controls="primary-navigation" aria-expanded="false">
+                <span></span><span></span><span></span>
+              </button>
+            </div>
+          </div>
+        </header>
+      );
+    }
+
+    // ===== NOTICES =====
+    function NoticesBar() {
+      const [index, setIndex] = useState(0);
+      const notices = [
+        '欢迎来到鹦鹉世界，紫米的温暖小窝 🌿',
+        '一只绿鹦鹉的岛屿生活记录，每一天都很平凡又美好。',
+      ];
+
+      useEffect(() => {
+        const t = setInterval(() => setIndex(i => (i + 1) % notices.length), 4000);
+        return () => clearInterval(t);
+      }, [notices.length]);
+
+      return (
+        <div className="notices-bar">
+          <span>{notices[index]}</span>
+          <span className={`notice-dot ${index === 0 ? 'active' : ''}`} onClick={() => setIndex(0)} />
+          <span className={`notice-dot ${index === 1 ? 'active' : ''}`} onClick={() => setIndex(1)} />
+        </div>
+      );
+    }
+
+    // ===== HERO =====
+    function Hero() {
+      return (
+        <section className="hero-section">
+          <div className="hero-inner">
+            <div className="hero-left">
+              <div className="hero-banner">
+                <div className="hero-banner-content">
+                  <div className="hero-eyebrow">ISLAND KEEPER · 紫米的小窝</div>
+                  <h1 className="hero-title">
+                    欢迎来到<em>鹦鹉世界</em>
+                  </h1>
+                  <p className="hero-subtitle">
+                    一只绿鹦鹉的岛屿生活记录。清晨的咖啡、午后的阳光、海边的散步、花园里的花开花落——在这里，时间很慢，每一天都很平凡又美好。
+                  </p>
+                  <div className="hero-tags">
+                    <span className="hero-tag"><Icon name="leaf" size={12} /> 生活在岛上</span>
+                    <span className="hero-tag"><Icon name="coffee" size={12} /> 晨间 ☕</span>
+                    <span className="hero-tag"><Icon name="music" size={12} /> 喜欢听音乐</span>
+                    <span className="hero-tag"><Icon name="flower" size={12} /> 养花爱好者</span>
+                    <span className="hero-tag"><Icon name="book" size={12} /> 爱读书</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="hero-sidebar">
+              <div className="author-card">
+                <div className="author-card-header">
+                  <img
+                    src="https://images.pexels.com/photos/52726/pexels-photo-52726.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+                    alt="紫米的头像"
+                    className="author-avatar"
+                  />
+                  <div className="author-info">
+                    <div className="author-eyebrow">ISLAND KEEPER</div>
+                    <div className="author-name">紫米 ZiMi</div>
+                    <div className="author-role">绿鹦鹉 · 岛屿居民</div>
+                  </div>
+                </div>
+                <div className="author-card-body">
+                  <p className="author-bio">"假如我再也见不到你，祝你早安，午安，晚安！"</p>
+                  <div className="author-detail">
+                    <Icon name="mapPin" size={14} />
+                    住在岛最东边的椰子树下
+                  </div>
+                  <div className="author-stats">
+                    <div className="stat-item">
+                      <div className="stat-num">128</div>
+                      <div className="stat-label">照片</div>
+                    </div>
+                    <div className="stat-item">
+                      <div className="stat-num">56</div>
+                      <div className="stat-label">日记</div>
+                    </div>
+                    <div className="stat-item">
+                      <div className="stat-num">892</div>
+                      <div className="stat-label">访客</div>
+                    </div>
+                  </div>
+                  <div className="island-status">
+                    <div className="island-status-dot"></div>
+                    <span className="island-status-text">岛屿在线 · 欢迎来到我的小窝</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ===== PHOTO WALL =====
+    const photos = [
+      { id: 1, src: 'https://images.pexels.com/photos/1065734/pexels-photo-1065734.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '清晨的咖啡时光', w: 'wide' },
+      { id: 2, src: 'https://images.pexels.com/photos/1591336/pexels-photo-1591336.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '窗外的阳光', w: 'tall' },
+      { id: 3, src: 'https://images.pexels.com/photos/1170986/pexels-photo-1170986.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '紫米的花园' },
+      { id: 4, src: 'https://images.pexels.com/photos/247466/pexels-photo-247466.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '雨后的花园' },
+      { id: 5, src: 'https://images.pexels.com/photos/1668980/pexels-photo-1668980.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '岛上的日落', w: 'wide' },
+      { id: 6, src: 'https://images.pexels.com/photos/1174244/pexels-photo-1174244.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '午后的书' },
+      { id: 7, src: 'https://images.pexels.com/photos/2613230/pexels-photo-2613230.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '海边的散步', w: 'tall' },
+      { id: 8, src: 'https://images.pexels.com/photos/1294265/pexels-photo-1294265.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '小小的快乐' },
+      { id: 9, src: 'https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '日落与海', w: 'wide' },
+      { id: 10, src: 'https://images.pexels.com/photos/1588278/pexels-photo-1588278.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '花与蝶' },
+      { id: 11, src: 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '清晨的鸟鸣', w: 'tall' },
+      { id: 12, src: 'https://images.pexels.com/photos/3379934/pexels-photo-3379934.jpeg?auto=compress&cs=tinysrgb&w=600', caption: '温暖的小窝' },
+    ];
+
+    function PhotoWall() {
+      return (
+        <section className="section" id="photos">
+          <div className="section-ribbon">
+            <div className="section-ribbon-bg"><Icon name="camera" size={13} /> 生活照片墙</div>
+            <div className="section-ribbon-sub">共 {photos.length} 张</div>
+          </div>
+          <div className="photo-wall-grid">
+            {photos.map(p => (
+              <div key={p.id} className={`photo-card ${p.w || ''}`}>
+                <img src={p.src} alt={p.caption} loading="lazy" decoding="async" />
+                <div className="photo-caption">{p.caption}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    }
+
+    // ===== BLOG POSTS / MOMENTS =====
+    const posts = [
+      {
+        id: 1,
+        cover: 'https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=600',
+        category: '生活',
+        date: '2026年7月28日',
+        title: '早晨的第一杯咖啡，是岛上的仪式感',
+        excerpt: '每天起床后第一件事就是煮咖啡，看着窗外的海浪慢慢醒来。绿鹦鹉的早晨从不匆忙，阳光和咖啡豆的香气是最好的闹钟。',
+        tags: ['咖啡', '日常'],
+        views: 128,
+        comments: 12,
+      },
+      {
+        id: 2,
+        cover: 'https://images.pexels.com/photos/1118286/pexels-photo-1118286.jpeg?auto=compress&cs=tinysrgb&w=600',
+        category: '旅行',
+        date: '2026年7月26日',
+        title: '去海边捡贝壳，遇见了一只迷路的小海星',
+        excerpt: '今天的潮水退得早，沿着礁石走了好久。在沙滩角落发现了一只小海星，给它找了个有水的小坑，希望它明天还能找到回家的路。',
+        tags: ['海边', '自然'],
+        views: 256,
+        comments: 23,
+      },
+      {
+        id: 3,
+        cover: 'https://images.pexels.com/photos/1062197/pexels-photo-1062197.jpeg?auto=compress&cs=tinysrgb&w=600',
+        category: '园艺',
+        date: '2026年7月24日',
+        title: '种下了第一批向日葵种子，期待着秋天的金黄',
+        excerpt: '邻居送了我一包向日葵种子，种在后院向阳的位置。每天早上浇水，看着泥土里冒出的小绿芽，像是看到了秋天的阳光提前抵达。',
+        tags: ['花', '种植'],
+        views: 198,
+        comments: 18,
+      },
+      {
+        id: 4,
+        cover: 'https://images.pexels.com/photos/1591336/pexels-photo-1591336.jpeg?auto=compress&cs=tinysrgb&w=600',
+        category: '阅读',
+        date: '2026年7月22日',
+        title: '重读《小王子》，在鹦鹉的视角下有了全新的感受',
+        excerpt: '"如果你想和别人交朋友，就请驯服我吧。" 作为一只鹦鹉，这句话有了更深的含义——驯服是建立联系，是愿意为彼此花费时间。',
+        tags: ['书', '小王子'],
+        views: 312,
+        comments: 34,
+      },
+      {
+        id: 5,
+        cover: 'https://images.pexels.com/photos/247466/pexels-photo-247466.jpeg?auto=compress&cs=tinysrgb&w=600',
+        category: '美食',
+        date: '2026年7月20日',
+        title: '尝试用岛上的蜂蜜做了烘焙面包，差点烧了厨房',
+        excerpt: '蜂蜜是跟狐狸邻居换的，听说她家的蜜蜂采集的是岛上的野花。面包出炉的时候焦了一半，但味道出奇的好，也许这就是岛上的风味。',
+        tags: ['烘焙', '蜂蜜'],
+        views: 176,
+        comments: 15,
+      },
+      {
+        id: 6,
+        cover: 'https://images.pexels.com/photos/1668980/pexels-photo-1668980.jpeg?auto=compress&cs=tinysrgb&w=600',
+        category: '散步',
+        date: '2026年7月18日',
+        title: '黄昏时沿着海岸线散步，看太阳沉入海平面',
+        excerpt: '这是岛上最安静的时刻。潮水轻轻拍打着礁石，海鸥在远处盘旋。有时候什么都不想，只是走着，让海风吹走一天的疲惫。',
+        tags: ['黄昏', '海边'],
+        views: 223,
+        comments: 20,
+      },
+    ];
+
+    function PostCard({ post }) {
+      return (
+        <a href="#" className="post-card">
+          <img src={post.cover} alt={post.title} className="post-cover" loading="lazy" />
+          <div className="post-body">
+            <div className="post-meta-top">
+              <span className="post-category">{post.category}</span>
+              <span className="post-date">{post.date}</span>
+            </div>
+            <h2 className="post-title">{post.title}</h2>
+            <p className="post-excerpt">{post.excerpt}</p>
+            <div className="post-meta-bottom">
+              {post.tags.map(t => <span key={t} className="post-tag">#{t}</span>)}
+              <div className="post-stats">
+                <span className="post-stat"><Icon name="clock" size={13} /> {post.views}</span>
+                <span className="post-stat"><Icon name="message" size={13} /> {post.comments}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      );
+    }
+
+    function MomentsSection() {
+      return (
+        <section className="section" id="moments">
+          <div className="section-ribbon">
+            <div className="section-ribbon-bg" style={{ background: 'var(--theme-accent)', color: 'var(--color-on-accent)' }}>
+              <Icon name="feather" size={13} /> 日常点滴
+            </div>
+            <div className="section-ribbon-sub" style={{ color: 'var(--theme-accent)', borderColor: 'var(--theme-accent)', background: 'rgba(247,205,103,0.1)' }}>
+              {posts.length} 篇记录
+            </div>
+          </div>
+          <div className="posts-list">
+            {posts.map(p => <PostCard key={p.id} post={p} />)}
+          </div>
+        </section>
+      );
+    }
+
+    // ===== ABOUT =====
+    function AboutSection() {
+      return (
+        <section className="section" id="about">
+          <div className="section-ribbon">
+            <div className="section-ribbon-bg" style={{ background: 'var(--theme-accent)', color: 'var(--color-on-accent)' }}>
+              <Icon name="bird" size={13} /> 关于紫米
+            </div>
+            <div className="section-ribbon-sub" style={{ color: 'var(--theme-accent)', borderColor: 'var(--theme-accent)', background: 'rgba(247,205,103,0.1)' }}>
+              岛屿居民档案
+            </div>
+          </div>
+          <div className="about-section">
+            <img
+              src="https://images.pexels.com/photos/247466/pexels-photo-247466.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="岛上的花园"
+              className="about-hero-img"
+              loading="lazy"
+            />
+            <div className="about-body">
+              <div className="about-name-row">
+                <img
+                  src="https://images.pexels.com/photos/52726/pexels-photo-52726.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&dpr=2"
+                  alt="紫米"
+                  className="about-avatar"
+                />
+                <div>
+                  <div className="about-name">紫米 ZiMi</div>
+                  <div className="about-nick">绿鹦鹉 · 岛屿居民 · 花园园丁</div>
+                </div>
+              </div>
+              <div className="about-bio">
+                我是一只绿色的鹦鹉，最喜欢的事情就是在岛上散步、收集种子、和邻居们聊天。我的窝在岛最东边的那棵椰子树下，每天清晨听着海浪声醒来，傍晚坐在阳台上看着太阳沉入海平面。这里没有闹钟，没有打卡，只有风的声音和朋友的问候。
+              </div>
+
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                <div className="about-detail-card">
+                  <div className="about-detail-card-icon" style={{ background: 'rgb(111 186 44 / 10%)', color: '#6fba2c', borderColor: 'rgb(111 186 44 / 25%)' }}>
+                    <Icon name="leaf" size={16} />
+                  </div>
+                  <div>
+                    <div className="about-detail-card-label">性格类型</div>
+                    <div className="about-detail-card-value">INFP · 调停者</div>
+                  </div>
+                </div>
+                <div className="about-detail-card">
+                  <div className="about-detail-card-icon" style={{ background: 'rgb(247 205 103 / 15%)', color: 'var(--theme-accent)', borderColor: 'rgba(247,205,103,0.4)' }}>
+                    <Icon name="sun" size={16} />
+                  </div>
+                  <div>
+                    <div className="about-detail-card-label">岛上住所</div>
+                    <div className="about-detail-card-value">东边椰子树下的窝</div>
+                  </div>
+                </div>
+                <div className="about-detail-card">
+                  <div className="about-detail-card-icon" style={{ background: 'rgb(25 200 185 / 10%)', color: 'var(--theme-primary)', borderColor: 'rgb(25 200 185 / 25%)' }}>
+                    <Icon name="flower" size={16} />
+                  </div>
+                  <div>
+                    <div className="about-detail-card-label">最爱的事</div>
+                    <div className="about-detail-card-value">园艺 · 烘焙 · 散步</div>
+                  </div>
+                </div>
+                <div className="about-detail-card">
+                  <div className="about-detail-card-icon" style={{ background: 'rgb(169 185 220 / 20%)', color: '#6b7fa3', borderColor: 'rgba(169,185,220,0.4)' }}>
+                    <Icon name="music" size={16} />
+                  </div>
+                  <div>
+                    <div className="about-detail-card-label">常听的音乐</div>
+                    <div className="about-detail-card-value">岛歌 BGM · 轻音乐</div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="about-quote">
+                <Icon name="feather" size={14} />
+                假如我再也见不到你，祝你早安，午安，晚安。
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    // ===== SIDEBAR =====
+    function Sidebar() {
+      const tags = [
+        { name: '生活', count: 18 },
+        { name: '旅行', count: 12 },
+        { name: '园艺', count: 8 },
+        { name: '阅读', count: 15 },
+        { name: '美食', count: 10 },
+        { name: '散步', count: 9 },
+        { name: '咖啡', count: 7 },
+        { name: '海边', count: 11 },
+        { name: '花', count: 6 },
+        { name: '日常', count: 20 },
+      ];
+
+      return (
+        <div className="content-secondary">
+          <div className="widget">
+            <div className="widget-header">探索标签</div>
+            <div className="widget-body">
+              <div className="tag-cloud">
+                {tags.map(t => (
+                  <span key={t.name} className="tag-item">
+                    #{t.name}
+                    <span className="tag-count">{t.count}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // ===== FOOTER =====
+    function Footer() {
+      return (
+        <footer className="site-footer">
+          <div className="footer-inner">
+            <div className="footer-left">
+              <div className="footer-brand">
+                <span className="footer-brand-icon">
+                  <Icon name="bird" size={12} />
+                </span>
+                鹦鹉世界 · 紫米的小窝
+              </div>
+              <div style={{ marginTop: 4 }}>
+                &copy; 2024&ndash;{new Date().getFullYear()} ZiMi &middot; 用 <span style={{ color: 'var(--theme-primary)' }}>&#9829;</span> 记录每一天
+              </div>
+            </div>
+            <div className="footer-links">
+              <a href="#" className="footer-link"><Icon name="rss" size={14} /> RSS</a>
+              <a href="#" className="footer-link"><Icon name="github" size={14} /> GitHub</a>
+              <span className="footer-link" style={{ opacity: 0.5 }}>基于 Acorn 主题风格</span>
+            </div>
+          </div>
+        </footer>
+      );
+    }
+
+    // ===== APP =====
+    function App() {
+      const [activeTab, setActiveTab] = useState('photos');
+      const [isDark, setIsDark] = useState(false);
+      const [headerCompact, setHeaderCompact] = useState(false);
+
+      const toggleTheme = () => {
+        const next = !isDark;
+        setIsDark(next);
+        document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme-setting', next ? 'dark' : 'light');
+      };
+
+      useEffect(() => {
+        const handleScroll = () => {
+          setHeaderCompact(window.scrollY > 12);
+
+          const sections = ['photos', 'moments', 'about'];
+          for (const id of sections) {
+            const el = document.getElementById(id);
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              if (rect.top <= 100 && rect.bottom > 100) {
+                setActiveTab(id);
+                break;
+              }
+            }
+          }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      const handleTabChange = (tab) => {
+        setActiveTab(tab);
+        const el = document.getElementById(tab);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      return (
+        <div>
+          <Header
+            activeTab={activeTab}
+            onTabChange={handleTabChange}
+            isDark={isDark}
+            onThemeToggle={toggleTheme}
+            isCompact={headerCompact}
+          />
+          <NoticesBar />
+          <Hero />
+          <main className="main-content">
+            <div className="content-primary">
+              <PhotoWall />
+              <MomentsSection />
+              <AboutSection />
+            </div>
+            <Sidebar />
+          </main>
+          <Footer />
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
