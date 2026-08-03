@@ -1,4 +1,4 @@
-import { authorInfo } from '../data/content';
+import { authorInfo } from '../data/loader';
 import { LeafIcon, SunIcon, FlowerIcon, MusicIcon, FeatherIcon } from './Icons';
 
 export function AboutPage() {

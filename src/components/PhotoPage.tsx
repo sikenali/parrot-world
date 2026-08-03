@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { photos } from '../data/content';
+import { photos } from '../data/loader';
 import { PhotoLightbox } from './PhotoLightbox';
 import { CameraIcon } from './Icons';
 

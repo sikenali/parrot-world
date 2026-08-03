@@ -23,10 +23,12 @@
           el: el,
           config: {
             backend: {
-              name: 'test',
+              name: 'github',
+              repo: 'sikenali/parrot-world',
+              branch: 'master',
             },
-            media_folder: 'media',
-            public_folder: 'media',
+            media_folder: 'public/media',
+            public_folder: '/media',
             site_url: 'https://parrot-world.example.com',
             site_name: '鹦鹉世界 CMS',
             collections: [
@@ -44,6 +46,8 @@
                   { label: '发布日期', name: 'date', widget: 'datetime', required: true },
                   { label: '分类', name: 'category', widget: 'string', required: true },
                   { label: '标签', name: 'tags', widget: 'list', required: false },
+                  { label: '阅读数', name: 'views', widget: 'number', required: false },
+                  { label: '评论数', name: 'comments', widget: 'number', required: false },
                   { label: '正文', name: 'body', widget: 'markdown', required: true },
                 ],
               },
@@ -58,6 +62,7 @@
                   { label: '图片', name: 'image', widget: 'image', required: true },
                   { label: '标题', name: 'title', widget: 'string', required: false },
                   { label: '描述', name: 'caption', widget: 'string', required: false },
+                  { label: '标签', name: 'tags', widget: 'list', required: false },
                   { label: '宽度(占2格)', name: 'wide', widget: 'boolean', required: false },
                   { label: '高度(占2行)', name: 'tall', widget: 'boolean', required: false },
                 ],

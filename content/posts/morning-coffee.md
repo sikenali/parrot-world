@@ -3,6 +3,9 @@ title: "早晨的第一杯咖啡，是岛上的仪式感"
 date: 2026-07-28
 cover: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg?auto=compress&cs=tinysrgb&w=800"
 category: "生活"
+excerpt: "每天起床后第一件事就是煮咖啡，看着窗外的海浪慢慢醒来。绿鹦鹉的早晨从不匆忙，阳光和咖啡豆的香气是最好的闹钟。"
+views: 128
+comments: 12
 tags:
   - 咖啡
   - 日常

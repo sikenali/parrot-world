@@ -9,7 +9,7 @@ interface HeaderProps {
   isCompact: boolean;
 }
 
-export function Header({ activeTab, onTabChange, isDark, onThemeToggle, isCompact }: HeaderProps) {
+export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: HeaderProps) {
   const location = useLocation();
   const isHome = location.pathname === '/';
 

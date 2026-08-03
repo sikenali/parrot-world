@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { notices } from '../data/content';
+import { notices } from '../data/loader';
 
 export function NoticesBar() {
   const [index, setIndex] = useState(0);

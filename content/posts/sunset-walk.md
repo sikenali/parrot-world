@@ -3,6 +3,9 @@ title: "黄昏时沿着海岸线散步，看太阳沉入海平面"
 date: 2026-07-18
 cover: "https://images.pexels.com/photos/1668980/pexels-photo-1668980.jpeg?auto=compress&cs=tinysrgb&w=800"
 category: "散步"
+excerpt: "这是岛上最安静的时刻。潮水轻轻拍打着礁石，海鸥在远处盘旋。有时候什么都不想，只是走着，让海风吹走一天的疲惫。"
+views: 223
+comments: 20
 tags:
   - 黄昏
   - 海边

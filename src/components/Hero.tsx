@@ -1,4 +1,4 @@
-import { authorInfo } from '../data/content';
+import { authorInfo } from '../data/loader';
 import { LeafIcon, CoffeeIcon, MusicIcon, FlowerIcon, BookIcon } from './Icons';
 
 export function Hero() {

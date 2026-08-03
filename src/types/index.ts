@@ -8,7 +8,8 @@ export interface Post {
   tags: string[];
   views: number;
   comments: number;
-  slug?: string;
+  slug: string;
+  body?: string;
 }
 
 export interface Photo {

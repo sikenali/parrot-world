@@ -1,57 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams, Link } from 'react-router-dom';
-import { posts } from '../data/content';
+import { getPostBySlug } from '../data/loader';
 import { ClockIcon, MessageIcon, ArrowLeftIcon } from './Icons';
-
-interface PostDetailData {
-  id: number;
-  cover: string;
-  category: string;
-  date: string;
-  title: string;
-  tags: string[];
-  views: number;
-  comments: number;
-  slug: string;
-  body: string;
-}
-
-function getPostBySlug(slug: string): PostDetailData | null {
-  const post = posts.find(p => p.slug === slug);
-  if (!post) return null;
-  return {
-    ...post,
-    body: '',
-  };
-}
+import type { Post } from '../types';
 
 export function PostDetail() {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<PostDetailData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [post, setPost] = useState<Post | null>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-    const target = slug ?? '';
-    const base = `${import.meta.env.BASE_URL || '/'}content/posts/${target}.md`;
-    fetch(base)
-      .then(res => {
-        if (!res.ok) throw new Error('not found');
-        return res.text();
-      })
-      .then(text => {
-        const fm = parseFrontmatter(text);
-        const content = fm.content;
-        const dp = posts.find(p => p.slug === target);
-        if (!dp) throw new Error('not found');
-        setPost({ ...dp, body: content });
-      })
-      .catch(() => setPost(null))
-      .finally(() => setLoading(false));
+    setPost(slug ? getPostBySlug(slug) || null : null);
+    setReady(true);
   }, [slug]);
 
-  if (loading) {
+  if (!ready) {
     return (
       <div className="post-loading">
         <div className="post-loading-spinner"></div>
@@ -103,7 +67,7 @@ export function PostDetail() {
       />
 
       <div className="post-detail-body">
-        <ReactMarkdown>{post.body}</ReactMarkdown>
+        <ReactMarkdown>{post.body || ''}</ReactMarkdown>
       </div>
 
       <div className="post-detail-footer">
@@ -114,14 +78,4 @@ export function PostDetail() {
       </div>
     </article>
   );
-}
-
-function parseFrontmatter(text: string): { title: string; content: string } {
-  const match = text.match(/^---\n([\s\S]+?)\n---\n?([\s\S]*)$/);
-  if (!match) return { title: '', content: text };
-  const raw = match[1];
-  let title = '';
-  const titleMatch = raw.match(/title:\s*"([^"]+)"/);
-  if (titleMatch) title = titleMatch[1];
-  return { title, content: match[2] };
 }

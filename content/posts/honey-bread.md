@@ -3,6 +3,9 @@ title: "尝试用岛上的蜂蜜做了烘焙面包，差点烧了厨房"
 date: 2026-07-20
 cover: "https://images.pexels.com/photos/247466/pexels-photo-247466.jpeg?auto=compress&cs=tinysrgb&w=800"
 category: "美食"
+excerpt: "蜂蜜是跟狐狸邻居换的，听说她家的蜜蜂采集的是岛上的野花。面包出炉的时候焦了一半，但味道出奇的好，也许这就是岛上的风味。"
+views: 176
+comments: 15
 tags:
   - 烘焙
   - 蜂蜜

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { posts } from '../data/content';
-import { ClockIcon, MessageIcon, ArrowLeftIcon } from './Icons';
+import { posts } from '../data/loader';
+import { ClockIcon, MessageIcon } from './Icons';
 import { Link } from 'react-router-dom';
 
 interface PostCardProps {

@@ -3,6 +3,9 @@ title: "重读《小王子》，在鹦鹉的视角下有了全新的感受"
 date: 2026-07-22
 cover: "https://images.pexels.com/photos/1591336/pexels-photo-1591336.jpeg?auto=compress&cs=tinysrgb&w=800"
 category: "阅读"
+excerpt: "“如果你想和别人交朋友，就请驯服我吧。”作为一只鹦鹉，这句话有了更深的含义——驯服是建立联系，是愿意为彼此花费时间。"
+views: 312
+comments: 34
 tags:
   - 书
   - 小王子
