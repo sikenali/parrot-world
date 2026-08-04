@@ -1019,6 +1019,10 @@ body {
   .about-name-row { flex-direction: column; align-items: flex-start; gap: 10px; }
   .footer-inner { flex-wrap: nowrap; justify-content: space-between; padding: 0 4px; gap: 8px; }
   .site-footer { padding: 20px 16px; }
+  .footer-left { flex: 1 1 auto; min-width: 0; }
+  .footer-brand { white-space: nowrap; }
+  .footer-slogan { white-space: nowrap; }
+  .footer-links { flex: 0 0 auto; white-space: nowrap; }
   .site-header.is-menu-open .primary-nav {
     display: grid !important;
     position: fixed;
