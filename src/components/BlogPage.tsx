@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { posts } from '../data/loader';
 import { ClockIcon, MessageIcon } from './Icons';
 import { Link } from 'react-router-dom';
+import { imgSrc } from '../utils/img';
 
 interface PostCardProps {
   post: typeof posts[0];
@@ -10,7 +11,14 @@ interface PostCardProps {
 export function PostCard({ post }: PostCardProps) {
   return (
     <Link to={`/post/${post.slug}`} className="post-card">
-      <img src={post.cover} alt={post.title} className="post-cover" loading="lazy" />
+      <img
+        src={imgSrc(post.cover, 600)}
+        srcSet={`${imgSrc(post.cover, 400)} 400w, ${imgSrc(post.cover, 800)} 800w`}
+        sizes="(max-width: 480px) 100vw, 200px"
+        alt={post.title}
+        className="post-cover"
+        loading="lazy"
+      />
       <div className="post-body">
         <div className="post-meta-top">
           <span className="post-category">{post.category}</span>
