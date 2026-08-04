@@ -9,7 +9,7 @@ export function parseFrontmatter(raw: string): ParsedDoc {
   return { data: parseYaml(match[1]), content: match[2] || '' };
 }
 
-function parseYaml(text: string): Record<string, unknown> {
+export function parseYaml(text: string): Record<string, unknown> {
   const out: Record<string, unknown> = {};
   const lines = text.split(/\r?\n/);
   let i = 0;

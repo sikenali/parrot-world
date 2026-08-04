@@ -1,4 +1,4 @@
-import { parseFrontmatter } from './frontmatter';
+import { parseFrontmatter, parseYaml } from './frontmatter';
 import type { Post, Photo, AuthorInfo, Notice, Tag } from '../types';
 
 interface RawPost {
@@ -101,7 +101,7 @@ export const photos: Photo[] = Object.entries(photoModules).map(([, raw], idx) =
 });
 
 const authorRaw = Object.values(authorModule)[0] || '';
-const authorData = authorRaw ? (parseFrontmatter(authorRaw).data as unknown as RawAuthor) : {};
+const authorData = authorRaw ? (parseYaml(authorRaw) as unknown as RawAuthor) : {};
 
 export const authorInfo: AuthorInfo = {
   name: authorData.name || '紫米 ZiMi',
@@ -116,7 +116,7 @@ export const authorInfo: AuthorInfo = {
 };
 
 const noticesRaw = Object.values(noticesModule)[0] || '';
-const noticesData = noticesRaw ? (parseFrontmatter(noticesRaw).data as unknown as RawNotices) : {};
+const noticesData = noticesRaw ? (parseYaml(noticesRaw) as unknown as RawNotices) : {};
 
 export const notices: Notice[] = (noticesData.items || [])
   .map(i => i.text)
