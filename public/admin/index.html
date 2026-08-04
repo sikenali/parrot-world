@@ -15,11 +15,14 @@
   </head>
   <body>
     <div id="sveltia-cms"></div>
+    <script>
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
     <script>
       (function() {
         const el = document.getElementById('sveltia-cms');
-        SveltiaCMS.init({
+        CMS.init({
           el: el,
           config: {
             backend: {
@@ -30,6 +33,7 @@
             media_folder: 'public/media',
             public_folder: '/media',
             site_url: 'https://parrotworld.10012049.xyz',
+            load_config_file: false,
             site_name: '鹦鹉世界 CMS',
             collections: [
               {
