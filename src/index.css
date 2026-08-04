@@ -67,7 +67,6 @@ body {
   width: 100%;
   margin-inline: auto;
   min-height: var(--header-height);
-  overflow: hidden;
   border: 1px solid transparent;
   background:
     radial-gradient(ellipse 42rem 29rem at 8% -8rem, rgb(25 200 185 / 19%), transparent 74%),
@@ -227,6 +226,7 @@ body {
 
 .site-header.is-compact .header-surface::before {
   position: absolute; inset: 0; z-index: 0;
+  border-radius: inherit;
   background-image: radial-gradient(rgb(121 79 39 / 13%) 1px, transparent 1px);
   background-size: 13px 13px;
   opacity: 0.35;
