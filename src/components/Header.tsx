@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { BirdIcon } from './Icons';
 
 interface HeaderProps {
@@ -11,6 +12,16 @@ interface HeaderProps {
 
 export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: HeaderProps) {
   const location = useLocation();
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location.pathname]);
+
+  const handleTabSelect = (id: string) => {
+    onTabChange(id);
+    setMenuOpen(false);
+  };
 
   const tabs = [
     { id: 'photos', label: 'XiaoJiBaoBao', path: '/photos' },
@@ -24,7 +35,7 @@ export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: Header
   };
 
   return (
-    <header className={`site-header${isCompact ? ' is-compact' : ''}`} data-scroll-header>
+    <header className={`site-header${isCompact ? ' is-compact' : ''}${menuOpen ? ' is-menu-open' : ''}`} data-scroll-header>
       <div className="header-surface">
         <div className="header-inner">
           <Link to="/home" className="brand">
@@ -47,7 +58,7 @@ export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: Header
                       <Link
                         to={t.path}
                         className={`nav-link ${isActive(t.path) ? 'active' : ''}`}
-                        onClick={() => onTabChange(t.id)}
+                        onClick={() => handleTabSelect(t.id)}
                       >
                         {t.label}
                       </Link>
@@ -57,6 +68,18 @@ export function Header({ onTabChange, isDark, onThemeToggle, isCompact }: Header
               </nav>
             </div>
           )}
+          <button
+            className="menu-toggle"
+            type="button"
+            aria-label={menuOpen ? '关闭菜单' : '打开菜单'}
+            aria-expanded={menuOpen}
+            aria-controls="primary-navigation"
+            onClick={() => setMenuOpen(v => !v)}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
           <button
             className="theme-toggle"
             type="button"
