@@ -1023,7 +1023,8 @@ body {
     justify-content: flex-start;
   }
   .primary-nav { display: none !important; }
-  .menu-toggle { display: grid; width: 2.75rem; min-width: 2.75rem; height: 2.75rem; align-content: center; justify-content: center; gap: 0.24rem; margin-left: 0.15rem; border: 1px solid transparent; border-radius: var(--radius-pill); background: transparent; color: var(--theme-text-body); cursor: pointer; }
+  .theme-toggle { grid-column: 2; justify-self: center; }
+  .menu-toggle { display: grid; grid-column: 3; justify-self: end; width: 2.75rem; min-width: 2.75rem; height: 2.75rem; align-content: center; justify-content: center; gap: 0.24rem; margin-left: 0.15rem; border: 1px solid transparent; border-radius: var(--radius-pill); background: transparent; color: var(--theme-text-body); cursor: pointer; }
   .menu-toggle span { display: block; width: 1.15rem; height: 0.14rem; border-radius: var(--radius-pill); background: currentcolor; transition: transform var(--motion-duration) var(--motion-easing); }
   .site-header.is-menu-open .menu-toggle span:nth-child(1) { transform: translateY(0.4rem) rotate(45deg); }
   .site-header.is-menu-open .menu-toggle span:nth-child(2) { transform: scaleX(0); }
