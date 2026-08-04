@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from 'react';
-import { imgSrc } from '../utils/img';
+import { coverSrc } from '../utils/img';
 
 interface PhotoLightboxProps {
   photo: { src: string; caption: string } | null;
@@ -37,7 +37,7 @@ export function PhotoLightbox({ photo, onClose, onPrev, onNext }: PhotoLightboxP
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
       </button>
       <div className="lightbox-content" onClick={e => e.stopPropagation()}>
-        <img src={imgSrc(photo.src, 1400)} alt={photo.caption} className="lightbox-img" />
+        <img src={coverSrc(photo.src, 1400)} alt={photo.caption} className="lightbox-img" />
         {photo.caption && <div className="lightbox-caption">{photo.caption}</div>}
       </div>
     </div>

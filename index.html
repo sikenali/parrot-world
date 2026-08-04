@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800;900&family=Noto+Sans+SC:wght@500;700&display=swap" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>鹦鹉世界 · 紫米的小窝</title>
@@ -17,7 +17,7 @@
     <meta property="og:title" content="鹦鹉世界 · 紫米的小窝" />
     <meta property="og:description" content="牡丹鹦鹉紫米的生活记录，关于生活、自然与每一个温柔的瞬间。" />
     <meta property="og:url" content="https://parrotworld.10012049.xyz/" />
-    <meta property="og:image" content="https://parrotworld.10012049.xyz/favicon.svg" />
+    <meta property="og:image" content="https://images.pexels.com/photos/18113177/pexels-photo-18113177.jpeg?auto=compress&cs=tinysrgb&w=1200" />
     <meta property="og:image:alt" content="鹦鹉世界 · 紫米的小窝" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="鹦鹉世界 · 紫米的小窝" />
@@ -25,6 +25,17 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function () {
+        try {
+          var s = localStorage.getItem('parrot-theme');
+          if (s === 'dark' || s === 'light') {
+            document.documentElement.setAttribute('data-theme', s);
+            document.documentElement.setAttribute('data-theme-setting', s);
+          }
+        } catch (e) {}
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

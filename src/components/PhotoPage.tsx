@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { photos } from '../data/loader';
 import { PhotoLightbox } from './PhotoLightbox';
-import { imgSrc } from '../utils/img';
+import { coverSrc } from '../utils/img';
 import { CameraIcon } from './Icons';
 
 function getAllTags() {
@@ -84,8 +84,8 @@ export function PhotoPage() {
               onClick={() => handlePhotoClick(p)}
             >
               <img
-                src={imgSrc(p.src, 600)}
-                srcSet={`${imgSrc(p.src, 400)} 400w, ${imgSrc(p.src, 800)} 800w`}
+                src={coverSrc(p.src, 600)}
+                srcSet={`${coverSrc(p.src, 400)} 400w, ${coverSrc(p.src, 800)} 800w`}
                 sizes="(max-width: 900px) 50vw, 25vw"
                 alt={p.caption}
                 loading="lazy"

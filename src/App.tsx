@@ -1,22 +1,18 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import { Header } from './components/Header';
 import { NoticesBar } from './components/NoticesBar';
 import { Hero } from './components/Hero';
-import { PhotoPage } from './components/PhotoPage';
-import { BlogPage } from './components/BlogPage';
-import { AboutPage } from './components/AboutPage';
-import { PostDetail } from './components/PostDetail';
 import { Footer } from './components/Footer';
-import { useState } from 'react';
+import { useTheme } from './hooks/useTheme';
+
+const PhotoPage = lazy(() => import('./components/PhotoPage').then(m => ({ default: m.PhotoPage })));
+const BlogPage = lazy(() => import('./components/BlogPage').then(m => ({ default: m.BlogPage })));
+const AboutPage = lazy(() => import('./components/AboutPage').then(m => ({ default: m.AboutPage })));
+const PostDetail = lazy(() => import('./components/PostDetail').then(m => ({ default: m.PostDetail })));
 
 function HomeLayout({ children }: { children?: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme-setting', next ? 'dark' : 'light');
-  };
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <>
@@ -40,13 +36,7 @@ function HomeLayout({ children }: { children?: React.ReactNode }) {
 }
 
 function BlogLayout({ children }: { children: React.ReactNode }) {
-  const [isDark, setIsDark] = useState(false);
-  const toggleTheme = () => {
-    const next = !isDark;
-    setIsDark(next);
-    document.documentElement.setAttribute('data-theme', next ? 'dark' : 'light');
-    document.documentElement.setAttribute('data-theme-setting', next ? 'dark' : 'light');
-  };
+  const { isDark, toggleTheme } = useTheme();
 
   return (
     <>
@@ -69,31 +59,40 @@ function BlogLayout({ children }: { children: React.ReactNode }) {
 export default function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" replace />} />
-        <Route path="/home" element={<HomeLayout />} />
-        <Route path="/photos" element={
-          <BlogLayout>
-            <PhotoPage />
-          </BlogLayout>
-        } />
-        <Route path="/daily" element={
-          <BlogLayout>
-            <BlogPage />
-          </BlogLayout>
-        } />
-        <Route path="/about" element={
-          <BlogLayout>
-            <AboutPage />
-          </BlogLayout>
-        } />
-        <Route path="/post/:slug" element={
-          <BlogLayout>
-            <PostDetail />
-          </BlogLayout>
-        } />
-        <Route path="*" element={<Navigate to="/home" replace />} />
-      </Routes>
+      <Suspense
+        fallback={
+          <div className="post-loading">
+            <div className="post-loading-spinner" />
+            <div className="post-loading-text">正在加载…</div>
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" replace />} />
+          <Route path="/home" element={<HomeLayout />} />
+          <Route path="/photos" element={
+            <BlogLayout>
+              <PhotoPage />
+            </BlogLayout>
+          } />
+          <Route path="/daily" element={
+            <BlogLayout>
+              <BlogPage />
+            </BlogLayout>
+          } />
+          <Route path="/about" element={
+            <BlogLayout>
+              <AboutPage />
+            </BlogLayout>
+          } />
+          <Route path="/post/:slug" element={
+            <BlogLayout>
+              <PostDetail />
+            </BlogLayout>
+          } />
+          <Route path="*" element={<Navigate to="/home" replace />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import { useParams, Link } from 'react-router-dom';
 import { getPostBySlug } from '../data/loader';
+import { coverSrc } from '../utils/img';
 import { ClockIcon, MessageIcon, ArrowLeftIcon } from './Icons';
 import type { Post } from '../types';
 
@@ -61,7 +62,7 @@ export function PostDetail() {
       </header>
 
       <img
-        src={post.cover.replace(/w=\d+/, 'w=1200')}
+        src={coverSrc(post.cover, 1200)}
         alt={post.title}
         className="post-detail-cover"
       />
