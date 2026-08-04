@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "animal-island-ui": "^1.4.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-markdown": "^10.1.0",
@@ -19,7 +18,6 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^5.2.0",
-    "playwright-core": "^1.62.1",
     "typescript": "~5.7.3",
     "vite": "^7.3.2"
   }
