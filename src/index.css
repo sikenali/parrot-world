@@ -996,12 +996,15 @@ body {
   .photo-wall-grid { grid-auto-rows: 120px; }
   .about-body { padding: 16px; }
   .about-name-row { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer-inner { flex-wrap: nowrap; justify-content: space-between; padding: 0 4px; gap: 8px; }
+  .site-footer { padding: 20px 16px; }
   .site-header.is-menu-open .primary-nav {
     display: grid !important;
-    position: absolute;
-    top: calc(100% + 0.5rem);
+    position: fixed;
+    top: calc(var(--header-height) + 0.5rem);
     left: 0.75rem;
     right: 0.75rem;
+    overflow: hidden;
     padding: 0.5rem;
     border: 1px solid var(--theme-border);
     border-radius: 1.1rem;
