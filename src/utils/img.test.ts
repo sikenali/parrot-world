@@ -20,4 +20,9 @@ describe('imgSrc', () => {
   it('returns empty string for empty input', () => {
     expect(imgSrc('', 400)).toBe('');
   });
+
+  it('replaces w= even when it is not the last query param', () => {
+    expect(imgSrc('https://x.com/a.jpg?w=800&cs=tinysrgb', 400))
+      .toBe('https://x.com/a.jpg?w=400&cs=tinysrgb');
+  });
 });
