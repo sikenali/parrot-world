@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { photos } from '../data/loader';
 import { PhotoLightbox } from './PhotoLightbox';
+import { imgSrc } from '../utils/img';
 import { CameraIcon } from './Icons';
 
 function getAllTags() {
@@ -82,7 +83,14 @@ export function PhotoPage() {
               className={`photo-card ${p.wide ? 'wide' : ''} ${p.tall ? 'tall' : ''}`}
               onClick={() => handlePhotoClick(p)}
             >
-              <img src={p.src} alt={p.caption} loading="lazy" decoding="async" />
+              <img
+                src={imgSrc(p.src, 600)}
+                srcSet={`${imgSrc(p.src, 400)} 400w, ${imgSrc(p.src, 800)} 800w`}
+                sizes="(max-width: 900px) 50vw, 25vw"
+                alt={p.caption}
+                loading="lazy"
+                decoding="async"
+              />
               <div className="photo-caption">{p.caption}</div>
             </div>
           ))}
