@@ -1,14 +1,15 @@
 ---
-title: "紫米第一次在我手心睡着"
+title: 紫米第一次在我手心睡着
+excerpt: 那天下午，紫米在我手心里打了个哈欠，然后把小脑袋埋进翅膀里，缩成一小团，安心地睡着了。这是它第一次愿意在我手上睡着。
+cover: ''
+cover_thumb: /photos/IMG_20260808_182946.jpg
 date: 2026-07-18
-cover: "https://images.pexels.com/photos/37018421/pexels-photo-37018421.jpeg?auto=compress&cs=tinysrgb&w=800"
-category: "成长"
-excerpt: "那天下午，紫米在我手心里打了个哈欠，然后把小脑袋埋进翅膀里，缩成一小团，安心地睡着了。这是它第一次愿意在我手上睡着。"
-views: 223
-comments: 20
+category: 成长
 tags:
   - 成长
   - 纪念
+views: 223
+comments: 20
 ---
 
 那天下午，我坐在窗边看书，紫米蹲在我的手心里，陪我一起晒太阳。
