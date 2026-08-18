@@ -1,14 +1,15 @@
 ---
-title: "紫米第一次喊出『Peekaboo』"
+title: 紫米第一次喊出『Peekaboo』
+excerpt: 我蹲在笼子边，用手挡住脸，再猛地张开："Peekaboo！"紫米歪着脑袋看我，半天没反应。第二天傍晚，我忽然听见一声清晰的『Peekaboo』——是紫米在说话。
+cover: ''
+cover_thumb: /photos/IMG_20260603_072052.jpg
 date: 2026-07-22
-cover: "https://images.pexels.com/photos/25912582/pexels-photo-25912582.jpeg?auto=compress&cs=tinysrgb&w=800"
-category: "成长"
-excerpt: '我蹲在笼子边，用手挡住脸，再猛地张开："Peekaboo！"紫米歪着脑袋看我，半天没反应。第二天傍晚，我忽然听见一声清晰的『Peekaboo』——是紫米在说话。'
-views: 312
-comments: 34
+category: 成长
 tags:
   - 成长
   - 惊喜
+views: 312
+comments: 34
 ---
 
 我一直想教紫米说话。
