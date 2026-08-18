@@ -57,7 +57,7 @@ const authorModule = import.meta.glob('/content/settings/author.yml', { query: '
 const homeModule = import.meta.glob('/content/settings/home.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const noticesModule = import.meta.glob('/content/settings/notices.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const imageModules = import.meta.glob(
-  '/public/photos/*.{jpg,jpeg,png,webp}',
+  '/content/photos/*.{jpg,jpeg,png,webp}',
   { query: '?url', import: 'default', eager: true }
 ) as Record<string, string>;
 
