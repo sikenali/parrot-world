@@ -1,14 +1,14 @@
 ---
-title: "第一次带紫米出门散步"
+title: 第一次带紫米出门散步
+excerpt: 我把紫米放在肩膀上出门。它一路上紧紧抓着我，看到路边的车就躲进我的头发里，等安静了又探出小脑袋，好奇地东张西望。
+cover: /media/IMG_20260808_183615.jpg
 date: 2026-07-24
-cover: "https://images.pexels.com/photos/30204056/pexels-photo-30204056.jpeg?auto=compress&cs=tinysrgb&w=800"
-category: "成长"
-excerpt: "我把紫米放在肩膀上出门。它一路上紧紧抓着我，看到路边的车就躲进我的头发里，等安静了又探出小脑袋，好奇地东张西望。"
-views: 198
-comments: 18
+category: 成长
 tags:
   - 成长
   - 散步
+views: 198
+comments: 18
 ---
 
 我把紫米放在肩膀上，系好牵引绳，准备带它出门。
