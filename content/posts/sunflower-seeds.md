@@ -1,7 +1,8 @@
 ---
 title: 第一次带紫米出门散步
 excerpt: 我把紫米放在肩膀上出门。它一路上紧紧抓着我，看到路边的车就躲进我的头发里，等安静了又探出小脑袋，好奇地东张西望。
-cover: /media/IMG_20260808_183615.jpg
+cover: ''
+cover_thumb: /photos/IMG_20260614_080331.jpg
 date: 2026-07-24
 category: 成长
 tags:
