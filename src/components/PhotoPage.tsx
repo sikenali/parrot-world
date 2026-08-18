@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { photos } from '../data/loader';
 import { PhotoLightbox } from './PhotoLightbox';
@@ -14,8 +14,26 @@ function getAllTags() {
 export function PhotoPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [lightboxPhoto, setLightboxPhoto] = useState<typeof photos[0] | null>(null);
+  const [loadedIds, setLoadedIds] = useState<Set<number>>(new Set());
+  const observerRef = useRef<IntersectionObserver | null>(null);
   const allTags = useMemo(() => getAllTags(), []);
   const activeTag = searchParams.get('tag') || '全部';
+
+  useEffect(() => {
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = Number((entry.target as HTMLElement).dataset.id);
+            setLoadedIds(prev => new Set(prev).add(id));
+            observerRef.current?.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '200px', threshold: 0.01 }
+    );
+    return () => observerRef.current?.disconnect();
+  }, []);
 
   const filtered = activeTag === '全部'
     ? photos
@@ -77,23 +95,29 @@ export function PhotoPage() {
         </div>
       ) : (
         <div className="photo-wall-grid">
-          {filtered.map(p => (
-            <div
-              key={p.id}
-              className={`photo-card ${p.wide ? 'wide' : ''} ${p.tall ? 'tall' : ''}`}
-              onClick={() => handlePhotoClick(p)}
-            >
-              <img
-                src={coverSrc(p.src, 600)}
-                srcSet={`${coverSrc(p.src, 400)} 400w, ${coverSrc(p.src, 800)} 800w`}
-                sizes="(max-width: 900px) 50vw, 25vw"
-                alt={p.caption}
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="photo-caption">{p.caption}</div>
-            </div>
-          ))}
+          {filtered.map(p => {
+            const isLoaded = loadedIds.has(p.id);
+            return (
+              <div
+                key={p.id}
+                ref={!isLoaded ? (el) => observerRef.current?.observe(el!) : undefined}
+                data-id={p.id}
+                className={`photo-card ${p.wide ? 'wide' : ''} ${p.tall ? 'tall' : ''}`}
+                onClick={() => handlePhotoClick(p)}
+              >
+                <img
+                  src={coverSrc(p.src, 600)}
+                  srcSet={`${coverSrc(p.src, 400)} 400w, ${coverSrc(p.src, 800)} 800w`}
+                  sizes="(max-width: 900px) 50vw, 25vw"
+                  alt={p.caption}
+                  loading="lazy"
+                  decoding="async"
+                  className={`photo-card-img${isLoaded ? ' loaded' : ''}`}
+                />
+                <div className="photo-caption">{p.caption}</div>
+              </div>
+            );
+          })}
         </div>
       )}
 
