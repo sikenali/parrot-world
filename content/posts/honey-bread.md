@@ -1,14 +1,15 @@
 ---
-title: "第一次请紫米吃小零食"
+title: 第一次请紫米吃小零食
+excerpt: 我掰了一小块苹果，放在手心里伸到紫米面前。它先凑过来闻了闻，歪着头看了看我，才小心翼翼地啄了一口，然后开心地一口接一口。
+cover: ''
+cover_thumb: /photos/IMG_20260808_183550.jpg
 date: 2026-07-20
-cover: "https://images.pexels.com/photos/37383786/pexels-photo-37383786.jpeg?auto=compress&cs=tinysrgb&w=800"
-category: "日常"
-excerpt: "我掰了一小块苹果，放在手心里伸到紫米面前。它先凑过来闻了闻，歪着头看了看我，才小心翼翼地啄了一口，然后开心地一口接一口。"
-views: 176
-comments: 15
+category: 日常
 tags:
   - 日常
   - 美食
+views: 176
+comments: 15
 ---
 
 鸟店老板说，牡丹鹦鹉最喜欢吃水果，苹果就是它们的小零食。
