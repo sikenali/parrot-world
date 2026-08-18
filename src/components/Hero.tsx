@@ -1,6 +1,14 @@
-import { authorInfo } from '../data/loader';
+import { authorInfo, homeDataConfig } from '../data/loader';
 import { LeafIcon, CoffeeIcon, MusicIcon, FlowerIcon, BookIcon } from './Icons';
 import { Link } from 'react-router-dom';
+
+const tagIcons: Record<string, JSX.Element> = {
+  '生活在岛上': <LeafIcon size={12} />,
+  '晨间 ☕': <CoffeeIcon size={12} />,
+  '喜欢听音乐': <MusicIcon size={12} />,
+  '养花爱好者': <FlowerIcon size={12} />,
+  '爱读书': <BookIcon size={12} />,
+};
 
 export function Hero() {
   return (
@@ -9,19 +17,19 @@ export function Hero() {
         <div className="hero-left">
           <div className="hero-banner">
             <div className="hero-banner-content">
-              <div className="hero-eyebrow">ISLAND KEEPER · 紫米的小窝</div>
+              <div className="hero-eyebrow">{homeDataConfig.eyebrow}</div>
               <h1 className="hero-title">
-                欢迎来到<em>鹦鹉世界</em>
+                {homeDataConfig.title}
               </h1>
               <p className="hero-subtitle">
-                 牡丹鹦鹉的生活记录。清晨的咖啡、午后的阳光、海边的散步、花园里的花开花落——在这里，时间很慢，每一天都带来开心。
+                {homeDataConfig.subtitle}
               </p>
               <div className="hero-tags">
-                <span className="hero-tag"><LeafIcon size={12} /> 生活在岛上</span>
-                <span className="hero-tag"><CoffeeIcon size={12} /> 晨间 ☕</span>
-                <span className="hero-tag"><MusicIcon size={12} /> 喜欢听音乐</span>
-                <span className="hero-tag"><FlowerIcon size={12} /> 养花爱好者</span>
-                <span className="hero-tag"><BookIcon size={12} /> 爱读书</span>
+                {homeDataConfig.tags.map(tag => (
+                  <span key={tag} className="hero-tag">
+                    {tagIcons[tag] || <BookIcon size={12} />} {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
@@ -35,7 +43,7 @@ export function Hero() {
                 className="author-avatar"
               />
               <div className="author-info">
-                <div className="author-eyebrow">ISLAND KEEPER</div>
+                <div className="author-eyebrow">{homeDataConfig.sidebarEyebrow}</div>
                 <div className="author-name">{authorInfo.name}</div>
                 <div className="author-role">{authorInfo.role}</div>
               </div>
@@ -70,7 +78,7 @@ export function Hero() {
       </div>
 
       <Link to="/daily" className="explore-more">
-        <span className="explore-more-text">探索更多</span>
+        <span className="explore-more-text">{homeDataConfig.exploreText}</span>
         <span className="explore-arrow">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
         </span>

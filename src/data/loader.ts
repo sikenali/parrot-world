@@ -42,9 +42,19 @@ interface RawNotices {
   items?: { text?: string }[];
 }
 
+interface RawHome {
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  tags?: string[];
+  sidebar_eyebrow?: string;
+  explore_text?: string;
+}
+
 const postModules = import.meta.glob('/content/posts/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const photoModules = import.meta.glob('/content/photos/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const authorModule = import.meta.glob('/content/settings/author.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const homeModule = import.meta.glob('/content/settings/home.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const noticesModule = import.meta.glob('/content/settings/notices.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const imageModules = import.meta.glob([
   '/content/photos/*.{jpg,jpeg,png,webp}',
@@ -179,3 +189,15 @@ export function getAllTags(): Tag[] {
 export function getPostBySlug(slug: string): Post | undefined {
   return posts.find(p => p.slug === slug);
 }
+
+const homeRaw = Object.values(homeModule)[0] || '';
+const homeData = homeRaw ? (parseYaml(homeRaw) as unknown as RawHome) : {};
+
+export const homeDataConfig = {
+  eyebrow: homeData.eyebrow || 'ISLAND KEEPER · 紫米的小窝',
+  title: homeData.title || '欢迎来到鹦鹉世界',
+  subtitle: homeData.subtitle || '牡丹鹦鹉的生活记录。清晨的咖啡、午后的阳光、海边的散步、花园里的花开花落——在这里，时间很慢，每一天都带来开心。',
+  tags: homeData.tags || ['生活在岛上', '晨间 ☕', '喜欢听音乐', '养花爱好者', '爱读书'],
+  sidebarEyebrow: homeData.sidebar_eyebrow || 'ISLAND KEEPER',
+  exploreText: homeData.explore_text || '探索更多',
+};

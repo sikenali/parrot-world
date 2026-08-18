@@ -98,6 +98,20 @@
                     ],
                   },
                   {
+                    name: 'home',
+                    label: '首页内容',
+                    singular_field: true,
+                    file: 'content/settings/home.yml',
+                    fields: [
+                      { label: '顶部徽章文字', name: 'eyebrow', widget: 'string', default: 'ISLAND KEEPER · 紫米的小窝' },
+                      { label: '主标题', name: 'title', widget: 'string', default: '欢迎来到鹦鹉世界' },
+                      { label: '副标题描述', name: 'subtitle', widget: 'text', default: '牡丹鹦鹉的生活记录。清晨的咖啡、午后的阳光、海边的散步、花园里的花开花落——在这里，时间很慢，每一天都带来开心。' },
+                      { label: '标签列表', name: 'tags', widget: 'list', default: ['生活在岛上', '晨间 ☕', '喜欢听音乐', '养花爱好者', '爱读书'] },
+                      { label: '侧边栏徽章', name: 'sidebar_eyebrow', widget: 'string', default: 'ISLAND KEEPER' },
+                      { label: '探索按钮文字', name: 'explore_text', widget: 'string', default: '探索更多' },
+                    ],
+                  },
+                  {
                     name: 'notices',
                     label: '滚动公告',
                     file: 'content/settings/notices.yml',
