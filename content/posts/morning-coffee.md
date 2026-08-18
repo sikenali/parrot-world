@@ -1,14 +1,15 @@
 ---
-title: "紫米来我家的第一天"
+title: 紫米来我家的第一天
+excerpt: 纸箱里传来轻轻的啾啾声。我打开盖子，一只小小的牡丹鹦鹉正抬头看着我，眼睛圆圆的，带着一点害怕。从那天起，我们家多了一位新成员。
+cover: ''
+cover_thumb: /photos/IMG_20260808_183834.jpg
 date: 2026-07-28
-cover: "https://images.pexels.com/photos/29590006/pexels-photo-29590006.jpeg?auto=compress&cs=tinysrgb&w=800"
-category: "成长"
-excerpt: "纸箱里传来轻轻的啾啾声。我打开盖子，一只小小的牡丹鹦鹉正抬头看着我，眼睛圆圆的，带着一点害怕。从那天起，我们家多了一位新成员。"
-views: 128
-comments: 12
+category: 成长
 tags:
   - 成长
   - 初遇
+views: 128
+comments: 12
 ---
 
 纸箱里传来轻轻的啾啾声。
