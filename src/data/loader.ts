@@ -56,10 +56,6 @@ const photoModules = import.meta.glob('/content/photos/*.md', { query: '?raw', i
 const authorModule = import.meta.glob('/content/settings/author.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const homeModule = import.meta.glob('/content/settings/home.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const noticesModule = import.meta.glob('/content/settings/notices.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
-const imageModules = import.meta.glob(
-  '/public/photos/*.{jpg,jpeg,png,webp}',
-  { query: '?url', import: 'default', eager: true }
-) as Record<string, string>;
 
 function slugOf(path: string): string {
   const name = path.split('/').pop() || '';
@@ -86,10 +82,6 @@ function sortByDateDesc<T extends { date: string }>(arr: T[]): T[] {
   return [...arr].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
 
-function captionFromFilename(name: string): string {
-  return name.replace(/\.(jpg|jpeg|png|webp)$/i, '').replace(/_/g, ' ');
-}
-
 export const posts: Post[] = sortByDateDesc(
   Object.entries(postModules).map(([path, raw], idx) => {
     const { data, content } = parseFrontmatter(raw);
@@ -112,7 +104,7 @@ export const posts: Post[] = sortByDateDesc(
 );
 
 export const photos: Photo[] = (() => {
-  const mdPhotos: Photo[] = Object.entries(photoModules).map(([, raw], idx) => {
+  return Object.entries(photoModules).map(([, raw], idx) => {
     const { data } = parseFrontmatter(raw);
     const fm = data as unknown as RawPhoto;
     return {
@@ -124,29 +116,6 @@ export const photos: Photo[] = (() => {
       tags: fm.tags || [],
     };
   });
-
-  const mdSrcs = new Set(mdPhotos.map(p => p.src));
-  const imageEntries = Object.entries(imageModules).sort(([a], [b]) => a.localeCompare(b));
-  let nextId = mdPhotos.length + 1;
-
-  const imagePhotos: Photo[] = imageEntries
-    .filter(([path, url]) => {
-      const base = path.split('/').pop() || '';
-      const src = typeof url === 'string' ? url : String(url);
-      return !mdSrcs.has(src) && !mdSrcs.has('/' + base);
-    })
-    .map(([path, url]) => {
-      const base = path.split('/').pop() || '';
-      const src = typeof url === 'string' ? url : String(url);
-      return {
-        id: nextId++,
-        src,
-        caption: captionFromFilename(base),
-        tags: [],
-      };
-    });
-
-  return [...mdPhotos, ...imagePhotos];
 })();
 
 const authorRaw = Object.values(authorModule)[0] || '';

@@ -4,11 +4,12 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "node scripts/sync-photos.js && tsc && vite build",
+    "dev": "node scripts/optimize-photos.js && vite",
+    "build": "node scripts/sync-photos.js && node scripts/optimize-photos.js && tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "sync:photos": "node scripts/sync-photos.js"
+    "sync:photos": "node scripts/sync-photos.js",
+    "optimize:photos": "node scripts/optimize-photos.js"
   },
   "dependencies": {
     "react": "^18.3.1",
@@ -20,6 +21,7 @@
     "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^5.2.0",
+    "sharp": "^0.35.3",
     "typescript": "~5.7.3",
     "vite": "^7.3.2",
     "vitest": "^4.1.10"

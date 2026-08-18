@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { photos } from '../data/loader';
 import { PhotoLightbox } from './PhotoLightbox';
@@ -34,6 +34,16 @@ export function PhotoPage() {
   };
 
   const handleClose = () => setLightboxPhoto(null);
+
+  useEffect(() => {
+    if (!lightboxPhoto) return;
+    const idx = filtered.indexOf(lightboxPhoto);
+    const neighbors = [filtered[idx - 1], filtered[idx + 1]].filter(Boolean);
+    neighbors.forEach(p => {
+      const img = new Image();
+      img.src = coverSrc(p.src, 1600);
+    });
+  }, [lightboxPhoto]);
   const handlePrev = () => {
     if (!lightboxPhoto) return;
     const idx = filtered.indexOf(lightboxPhoto);

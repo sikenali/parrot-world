@@ -10,8 +10,19 @@ export function imgSrc(url: string, w: number): string {
   return `${url}${sep}w=${w}`;
 }
 
+const LOCAL_PHOTO_RE = /^\/photos\/(.+?)\.(jpg|jpeg|png|webp)$/i;
+
+function nearestWidth(w: number): number {
+  if (w <= 480) return 480;
+  if (w <= 800) return 800;
+  return 1600;
+}
+
 export function coverSrc(url: string, w: number): string {
   if (!url) return imgSrc(FALLBACK_IMAGE, w);
-  if (url.startsWith('/photos/')) return url;
+  const m = url.match(LOCAL_PHOTO_RE);
+  if (m) {
+    return `/photos/opt/${m[1]}-${nearestWidth(w)}.webp`;
+  }
   return imgSrc(url, w);
 }

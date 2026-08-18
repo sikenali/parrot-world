@@ -1,5 +1,6 @@
 import { authorInfo } from '../data/loader';
 import { LeafIcon, SunIcon, FlowerIcon, MusicIcon, FeatherIcon } from './Icons';
+import { coverSrc } from '../utils/img';
 
 export function AboutPage() {
   return (
@@ -24,7 +25,7 @@ export function AboutPage() {
         />
         <div className="about-page-body">
           <div className="about-name-row">
-            <img src={authorInfo.avatar} alt="紫米" className="about-avatar" />
+            <img src={coverSrc(authorInfo.avatar, 400)} alt="紫米" className="about-avatar" loading="lazy" />
             <div>
               <div className="about-name">{authorInfo.name}</div>
               <div className="about-nick">{authorInfo.nickname}</div>

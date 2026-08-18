@@ -1,6 +1,7 @@
 import { authorInfo, homeDataConfig } from '../data/loader';
 import { LeafIcon, CoffeeIcon, MusicIcon, FlowerIcon, BookIcon } from './Icons';
 import { Link } from 'react-router-dom';
+import { coverSrc } from '../utils/img';
 
 const tagIcons: Record<string, JSX.Element> = {
   '生活在岛上': <LeafIcon size={12} />,
@@ -38,9 +39,10 @@ export function Hero() {
           <div className="author-card">
             <div className="author-card-header">
               <img
-                src={authorInfo.avatar}
+                src={coverSrc(authorInfo.avatar, 400)}
                 alt="紫米的头像"
                 className="author-avatar"
+                loading="lazy"
               />
               <div className="author-info">
                 <div className="author-eyebrow">{homeDataConfig.sidebarEyebrow}</div>
