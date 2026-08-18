@@ -1,14 +1,14 @@
 ---
-title: "第一次给紫米洗澡"
+title: 第一次给紫米洗澡
+excerpt: 浴室的镜子上挂着一层薄薄的水雾。我往紫米身上轻轻洒了一点温水，它先是愣了一下，然后扑棱棱地抖起羽毛，开心地甩了我一脸水珠。
+cover: /media/IMG_20260808_183533.jpg
 date: 2026-07-26
-cover: "https://images.pexels.com/photos/7176413/pexels-photo-7176413.jpeg?auto=compress&cs=tinysrgb&w=800"
-category: "成长"
-excerpt: "浴室的镜子上挂着一层薄薄的水雾。我往紫米身上轻轻洒了一点温水，它先是愣了一下，然后扑棱棱地抖起羽毛，开心地甩了我一脸水珠。"
-views: 256
-comments: 23
+category: 成长
 tags:
   - 成长
   - 日常
+views: 256
+comments: 23
 ---
 
 浴室的镜子上挂着一层薄薄的水雾。
