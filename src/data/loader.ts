@@ -56,10 +56,10 @@ const photoModules = import.meta.glob('/content/photos/*.md', { query: '?raw', i
 const authorModule = import.meta.glob('/content/settings/author.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const homeModule = import.meta.glob('/content/settings/home.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const noticesModule = import.meta.glob('/content/settings/notices.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
-const imageModules = import.meta.glob([
-  '/content/photos/*.{jpg,jpeg,png,webp}',
+const imageModules = import.meta.glob(
   '/public/photos/*.{jpg,jpeg,png,webp}',
-], { query: '?url', import: 'default', eager: true }) as Record<string, string>;
+  { query: '?url', import: 'default', eager: true }
+) as Record<string, string>;
 
 function slugOf(path: string): string {
   const name = path.split('/').pop() || '';

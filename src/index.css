@@ -571,12 +571,14 @@ body {
   border-left: none;
 }
 
-/* ===== PHOTO WALL ===== */
+/* ===== PHOTO WALL (MASONRY) ===== */
 .photo-wall-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 160px;
-  gap: 10px;
+  columns: 4;
+  column-gap: 10px;
+}
+
+@media (max-width: 900px) {
+  .photo-wall-grid { columns: 2; }
 }
 
 .photo-card {
@@ -586,6 +588,8 @@ body {
   cursor: pointer;
   border: 1.5px solid var(--theme-border);
   background: var(--theme-surface-content);
+  break-inside: avoid;
+  margin-bottom: 10px;
   transition: transform var(--motion-duration) var(--motion-easing), box-shadow var(--motion-duration) var(--motion-easing);
 }
 
@@ -594,12 +598,9 @@ body {
   box-shadow: 0 6px 16px rgb(61 52 40 / 15%);
 }
 
-.photo-card.tall { grid-row: span 2; }
-.photo-card.wide { grid-column: span 2; }
-
 .photo-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
   display: block;
   transition: transform 0.4s var(--motion-easing);
 }
@@ -1008,10 +1009,8 @@ body {
   .main-content { grid-template-columns: 1fr; }
   .content-secondary { display: none; }
   .photo-wall-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-auto-rows: 140px;
+    columns: 2;
   }
-  .photo-card.wide { grid-column: span 1; }
   .post-card { grid-template-columns: 140px 1fr; }
 }
 
@@ -1020,7 +1019,7 @@ body {
   .hero-banner { padding: 24px 20px; }
   .post-card { grid-template-columns: 1fr; }
   .post-cover { min-height: 160px; }
-  .photo-wall-grid { grid-auto-rows: 120px; }
+  .photo-wall-grid { columns: 2; }
   .about-body { padding: 16px; }
   .about-name-row { flex-direction: column; align-items: flex-start; gap: 10px; }
   .footer-inner { flex-wrap: nowrap; justify-content: space-between; padding: 0 4px; gap: 8px; }
