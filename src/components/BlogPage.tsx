@@ -13,7 +13,7 @@ export function PostCard({ post }: PostCardProps) {
     <Link to={`/post/${post.slug}`} className="post-card">
       <img
         src={coverSrc(post.cover, 600)}
-        srcSet={`${coverSrc(post.cover, 400)} 400w, ${coverSrc(post.cover, 800)} 800w`}
+        srcSet={`${coverSrc(post.coverThumb || post.cover, 400)} 400w, ${coverSrc(post.cover, 800)} 800w`}
         sizes="(max-width: 480px) 100vw, 200px"
         alt={post.title}
         className="post-cover"

@@ -1,6 +1,7 @@
 export interface Post {
   id: number;
   cover: string;
+  coverThumb?: string;
   category: string;
   date: string;
   title: string;
@@ -31,6 +32,10 @@ export interface AuthorInfo {
   totalPhotos: number;
   totalPosts: number;
   totalVisitors: number;
+  personality?: string;
+  residence?: string;
+  hobbies?: string;
+  music?: string;
 }
 
 export interface Notice {

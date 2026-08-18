@@ -5,6 +5,7 @@ interface RawPost {
   title: string;
   date: string;
   cover: string;
+  cover_thumb?: string;
   category: string;
   excerpt?: string;
   tags?: string[];
@@ -31,6 +32,10 @@ interface RawAuthor {
   totalPhotos?: number;
   totalPosts?: number;
   totalVisitors?: number;
+  personality?: string;
+  residence?: string;
+  hobbies?: string;
+  music?: string;
 }
 
 interface RawNotices {
@@ -41,6 +46,10 @@ const postModules = import.meta.glob('/content/posts/*.md', { query: '?raw', imp
 const photoModules = import.meta.glob('/content/photos/*.md', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const authorModule = import.meta.glob('/content/settings/author.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
 const noticesModule = import.meta.glob('/content/settings/notices.yml', { query: '?raw', import: 'default', eager: true }) as Record<string, string>;
+const imageModules = import.meta.glob([
+  '/content/photos/*.{jpg,jpeg,png,webp}',
+  '/public/photos/*.{jpg,jpeg,png,webp}',
+], { query: '?url', import: 'default', eager: true }) as Record<string, string>;
 
 function slugOf(path: string): string {
   const name = path.split('/').pop() || '';
@@ -67,6 +76,10 @@ function sortByDateDesc<T extends { date: string }>(arr: T[]): T[] {
   return [...arr].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
 }
 
+function captionFromFilename(name: string): string {
+  return name.replace(/\.(jpg|jpeg|png|webp)$/i, '').replace(/_/g, ' ');
+}
+
 export const posts: Post[] = sortByDateDesc(
   Object.entries(postModules).map(([path, raw], idx) => {
     const { data, content } = parseFrontmatter(raw);
@@ -74,6 +87,7 @@ export const posts: Post[] = sortByDateDesc(
     return {
       id: idx + 1,
       cover: fm.cover || '',
+      coverThumb: fm.cover_thumb || '',
       category: fm.category || '随笔',
       date: formatDate(fm.date || ''),
       title: fm.title || '未命名',
@@ -87,18 +101,43 @@ export const posts: Post[] = sortByDateDesc(
   }),
 );
 
-export const photos: Photo[] = Object.entries(photoModules).map(([, raw], idx) => {
-  const { data } = parseFrontmatter(raw);
-  const fm = data as unknown as RawPhoto;
-  return {
-    id: idx + 1,
-    src: fm.image || '',
-    caption: fm.caption || fm.title || '',
-    wide: !!fm.wide,
-    tall: !!fm.tall,
-    tags: fm.tags || [],
-  };
-});
+export const photos: Photo[] = (() => {
+  const mdPhotos: Photo[] = Object.entries(photoModules).map(([, raw], idx) => {
+    const { data } = parseFrontmatter(raw);
+    const fm = data as unknown as RawPhoto;
+    return {
+      id: idx + 1,
+      src: fm.image || '',
+      caption: fm.caption || fm.title || '',
+      wide: !!fm.wide,
+      tall: !!fm.tall,
+      tags: fm.tags || [],
+    };
+  });
+
+  const mdSrcs = new Set(mdPhotos.map(p => p.src));
+  const imageEntries = Object.entries(imageModules).sort(([a], [b]) => a.localeCompare(b));
+  let nextId = mdPhotos.length + 1;
+
+  const imagePhotos: Photo[] = imageEntries
+    .filter(([path, url]) => {
+      const base = path.split('/').pop() || '';
+      const src = typeof url === 'string' ? url : String(url);
+      return !mdSrcs.has(src) && !mdSrcs.has('/' + base);
+    })
+    .map(([path, url]) => {
+      const base = path.split('/').pop() || '';
+      const src = typeof url === 'string' ? url : String(url);
+      return {
+        id: nextId++,
+        src,
+        caption: captionFromFilename(base),
+        tags: [],
+      };
+    });
+
+  return [...mdPhotos, ...imagePhotos];
+})();
 
 const authorRaw = Object.values(authorModule)[0] || '';
 const authorData = authorRaw ? (parseYaml(authorRaw) as unknown as RawAuthor) : {};
@@ -113,6 +152,10 @@ export const authorInfo: AuthorInfo = {
   totalPhotos: authorData.totalPhotos ?? photos.length,
   totalPosts: authorData.totalPosts ?? posts.length,
   totalVisitors: authorData.totalVisitors ?? 0,
+  personality: authorData.personality || 'INFP · 调停者',
+  residence: authorData.residence || '东边椰子树下的窝',
+  hobbies: authorData.hobbies || '园艺 · 烘焙 · 散步',
+  music: authorData.music || '岛歌 BGM · 轻音乐',
 };
 
 const noticesRaw = Object.values(noticesModule)[0] || '';

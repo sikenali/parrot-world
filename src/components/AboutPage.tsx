@@ -40,7 +40,7 @@ export function AboutPage() {
               </div>
               <div>
                 <div className="about-detail-card-label">性格类型</div>
-                <div className="about-detail-card-value">INFP · 调停者</div>
+                <div className="about-detail-card-value">{authorInfo.personality}</div>
               </div>
             </div>
             <div className="about-detail-card">
@@ -49,7 +49,7 @@ export function AboutPage() {
               </div>
               <div>
                 <div className="about-detail-card-label">岛上住所</div>
-                <div className="about-detail-card-value">东边椰子树下的窝</div>
+                <div className="about-detail-card-value">{authorInfo.residence}</div>
               </div>
             </div>
             <div className="about-detail-card">
@@ -58,7 +58,7 @@ export function AboutPage() {
               </div>
               <div>
                 <div className="about-detail-card-label">最爱的事</div>
-                <div className="about-detail-card-value">园艺 · 烘焙 · 散步</div>
+                <div className="about-detail-card-value">{authorInfo.hobbies}</div>
               </div>
             </div>
             <div className="about-detail-card">
@@ -67,7 +67,7 @@ export function AboutPage() {
               </div>
               <div>
                 <div className="about-detail-card-label">常听的音乐</div>
-                <div className="about-detail-card-value">岛歌 BGM · 轻音乐</div>
+                <div className="about-detail-card-value">{authorInfo.music}</div>
               </div>
             </div>
           </div>
