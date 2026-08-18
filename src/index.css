@@ -602,13 +602,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
-  transition: transform 0.4s var(--motion-easing), opacity 0.5s ease;
-  opacity: 0;
-  background: var(--theme-surface-secondary);
-}
-
-.photo-card img.loaded {
-  opacity: 1;
+  transition: transform 0.4s var(--motion-easing);
 }
 
 .photo-card:hover img { transform: scale(1.06); }
