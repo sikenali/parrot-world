@@ -12,6 +12,6 @@ export function imgSrc(url: string, w: number): string {
 
 export function coverSrc(url: string, w: number): string {
   if (!url) return imgSrc(FALLBACK_IMAGE, w);
-  if (url.startsWith('/photos/') || url.startsWith('photos/')) return imgSrc(url, w);
+  if (url.startsWith('/photos/')) return url;
   return imgSrc(url, w);
 }
