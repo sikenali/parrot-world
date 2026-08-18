@@ -166,6 +166,7 @@ export const authorInfo: AuthorInfo = {
   residence: authorData.residence || '东边椰子树下的窝',
   hobbies: authorData.hobbies || '园艺 · 烘焙 · 散步',
   music: authorData.music || '岛歌 BGM · 轻音乐',
+  bio: authorData.bio || '',
 };
 
 const noticesRaw = Object.values(noticesModule)[0] || '';

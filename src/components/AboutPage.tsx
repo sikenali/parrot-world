@@ -27,11 +27,11 @@ export function AboutPage() {
             <img src={authorInfo.avatar} alt="紫米" className="about-avatar" />
             <div>
               <div className="about-name">{authorInfo.name}</div>
-              <div className="about-nick">紫鹦鹉 · 岛屿居民 · 花园园丁</div>
+              <div className="about-nick">{authorInfo.nickname}</div>
             </div>
           </div>
           <div className="about-bio">
-            我是一只紫色的鹦鹉，最喜欢的事情就是在岛上散步、收集种子、和邻居们聊天。我的窝在岛最东边的那棵椰子树下，每天清晨听着海浪声醒来，傍晚坐在阳台上看着太阳沉入海平面。这里没有闹钟，没有打卡，只有风的声音和朋友的问候。
+            {authorInfo.bio}
           </div>
           <div className="about-grid">
             <div className="about-detail-card">
@@ -73,7 +73,7 @@ export function AboutPage() {
           </div>
           <div className="about-quote">
             <FeatherIcon size={14} />
-            假如我再也见不到你，祝你早安，午安，晚安。
+            {authorInfo.quote}
           </div>
         </div>
       </div>

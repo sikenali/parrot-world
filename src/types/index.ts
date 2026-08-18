@@ -36,6 +36,7 @@ export interface AuthorInfo {
   residence?: string;
   hobbies?: string;
   music?: string;
+  bio?: string;
 }
 
 export interface Notice {
