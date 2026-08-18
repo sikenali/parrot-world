@@ -1,7 +1,8 @@
 ---
 title: 第一次给紫米洗澡
 excerpt: 浴室的镜子上挂着一层薄薄的水雾。我往紫米身上轻轻洒了一点温水，它先是愣了一下，然后扑棱棱地抖起羽毛，开心地甩了我一脸水珠。
-cover: /media/IMG_20260808_183533.jpg
+cover: ''
+cover_thumb: /photos/IMG_20260614_080332.jpg
 date: 2026-07-26
 category: 成长
 tags:
